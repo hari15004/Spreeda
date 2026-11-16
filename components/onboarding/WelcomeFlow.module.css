@@ -1,0 +1,1045 @@
+.page {
+  min-height: 100dvh;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background: #f1f3f5;
+  color: #202827;
+}
+
+.shell {
+  width: min(76rem, 100%);
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  min-height: 3.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #202827;
+  font-size: 1.12rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.brandMark {
+  display: grid;
+  width: 2.3rem;
+  height: 2.3rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: #c0392b;
+  color: #fffdf8;
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+
+.languageControl {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #6b706e;
+  font-size: 0.78rem;
+}
+
+.languageSwitch {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border: 1px solid #e0e2e0;
+  border-radius: 999px;
+  background: #e9ebea;
+}
+
+.languageSwitch button {
+  min-height: 2rem;
+  padding: 0.2rem 0.7rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #656b69;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.languageSwitch button[aria-pressed="true"] {
+  background: #fff;
+  color: #a53125;
+  box-shadow: 0 1px 3px rgb(22 31 30 / 10%);
+}
+
+.layout {
+  display: grid;
+  min-height: min(49rem, calc(100dvh - 7rem));
+  grid-template-columns: minmax(17rem, 0.88fr) minmax(0, 1.12fr);
+  overflow: hidden;
+  border: 1px solid #e1e3e1;
+  border-radius: 1.5rem;
+  background: #fffefa;
+  box-shadow: 0 24px 70px rgb(30 41 40 / 9%);
+}
+
+.visualPanel {
+  position: relative;
+  display: flex;
+  min-height: 38rem;
+  flex-direction: column;
+  overflow: hidden;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background: #1c3040;
+  color: #fffdf8;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #f0ad86;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.visualPanel h1 {
+  max-width: 24rem;
+  margin: 1.2rem 0 0;
+  font-size: clamp(2rem, 4vw, 3.45rem);
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.visualNote {
+  margin: 0.9rem 0 0;
+  color: #cbd4d7;
+  font-size: 0.96rem;
+}
+
+.wordOrbit {
+  position: relative;
+  width: min(19rem, 80%);
+  aspect-ratio: 1;
+  margin: auto;
+  border: 1px solid rgb(255 255 255 / 13%);
+  border-radius: 50%;
+}
+
+.wordOrbit::before,
+.wordOrbit::after {
+  position: absolute;
+  inset: 13%;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 50%;
+  content: "";
+}
+
+.wordOrbit::after {
+  inset: 28%;
+  border-color: rgb(240 173 134 / 30%);
+}
+
+.orbitMark {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  display: grid;
+  width: 4.5rem;
+  height: 4.5rem;
+  place-items: center;
+  border: 1px solid rgb(240 173 134 / 55%);
+  border-radius: 50%;
+  background: #263d4e;
+  color: #f0ad86;
+  font-size: 1.8rem;
+  font-weight: 700;
+  transform: translate(-50%, -50%);
+}
+
+.wordOrbit span:not(.orbitMark) {
+  position: absolute;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  background: #263d4e;
+  color: #f6f1e7;
+  font-size: 0.88rem;
+}
+
+.wordTop {
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wordRight {
+  top: 38%;
+  right: -0.6rem;
+}
+
+.wordBottom {
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wordLeft {
+  top: 38%;
+  left: -1.3rem;
+}
+
+.visualFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 15%);
+  color: #cbd4d7;
+  font-size: 0.73rem;
+}
+
+.visualFooter span:first-child {
+  color: #f0ad86;
+  font-weight: 700;
+}
+
+.formPanel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.introPanel {
+  max-width: 34rem;
+  margin: auto 0;
+}
+
+.stepPill {
+  display: inline-flex;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: #f6eee7;
+  color: #a53125;
+  font-size: 0.67rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+.introText {
+  max-width: 29rem;
+  margin: 1.4rem 0 0;
+  color: #343c3a;
+  font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+}
+
+.primary {
+  display: inline-flex;
+  min-height: 3.2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 0.75rem 1.2rem;
+  border: 0;
+  border-radius: 0.7rem;
+  background: #c0392b;
+  color: #fffdf8;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.primary:hover {
+  background: #9d2d21;
+  transform: translateY(-1px);
+}
+
+.introPanel .primary {
+  margin-top: 1.6rem;
+}
+
+.localNote {
+  margin: 0.8rem 0 0;
+  color: #858b88;
+  font-size: 0.74rem;
+}
+
+.stepHeader {
+  margin-bottom: 1.65rem;
+}
+
+.stepCount {
+  color: #858b88;
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+.stepTrack {
+  height: 0.3rem;
+  margin-top: 0.65rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eceeeb;
+}
+
+.stepTrack span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #c0392b;
+  transition: width 180ms ease;
+}
+
+.formPanel h2 {
+  margin: 0;
+  color: #202827;
+  font-size: clamp(1.45rem, 2.7vw, 2rem);
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.description {
+  margin: 0.55rem 0 1.15rem;
+  color: #777e7b;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.languageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.languageCard,
+.choiceCard,
+.levelCard,
+.timeCard,
+.modeCard,
+.goalChip {
+  border: 1px solid #e4e6e3;
+  background: #fff;
+  color: #28302e;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.languageCard:hover,
+.choiceCard:hover,
+.levelCard:hover,
+.timeCard:hover,
+.modeCard:hover,
+.goalChip:hover {
+  transform: translateY(-1px);
+  border-color: #c8a596;
+}
+
+.languageCard {
+  display: grid;
+  min-height: 7rem;
+  align-content: start;
+  justify-items: start;
+  gap: 0.22rem;
+  padding: 0.75rem;
+  border-radius: 0.8rem;
+  text-align: left;
+}
+
+.languageNative {
+  color: #283c47;
+  font-family: var(--font-jp);
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.languageName {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.available,
+.comingSoon {
+  margin-top: 0.18rem;
+  color: #8a8e8b;
+  font-size: 0.56rem;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+}
+
+.available {
+  color: #4a7959;
+}
+
+.selected {
+  border-color: #c0392b !important;
+  background: #fff8f4 !important;
+  box-shadow: 0 0 0 1px #c0392b;
+}
+
+.choiceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
+}
+
+.choiceCard {
+  display: flex;
+  min-height: 3.7rem;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.8rem;
+  text-align: left;
+}
+
+.choiceCard span,
+.modeCard span {
+  color: #c0392b;
+  font-weight: 800;
+}
+
+.fieldLabel {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #555e5b;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.textInput {
+  width: 100%;
+  min-height: 2.8rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #e1e4e1;
+  border-radius: 0.65rem;
+  background: #fff;
+  color: #202827;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.textInput:focus-visible {
+  outline: 2px solid #2b3a55;
+  outline-offset: 2px;
+}
+
+.preferencesStep {
+  display: grid;
+  gap: 1.45rem;
+}
+
+.levelGrid {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.levelCard {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.7rem;
+  text-align: left;
+}
+
+.levelCard strong {
+  font-size: 0.8rem;
+}
+
+.levelCard span {
+  color: #777e7b;
+  font-size: 0.7rem;
+}
+
+.subheading {
+  margin-top: 0.1rem !important;
+  font-size: 1.15rem !important;
+}
+
+.goalGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.goalChip {
+  min-height: 2.15rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  color: #59615e;
+  font-size: 0.69rem;
+}
+
+.goalSelected,
+.modeSelected {
+  border-color: #c0392b !important;
+  background: #fff3ec !important;
+  color: #9d2d21 !important;
+}
+
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.timeCard {
+  display: grid;
+  min-height: 4rem;
+  justify-items: center;
+  align-content: center;
+  gap: 0.1rem;
+  border-radius: 0.75rem;
+}
+
+.timeCard strong {
+  font-size: 1.1rem;
+}
+
+.timeCard span {
+  color: #7e8581;
+  font-size: 0.6rem;
+}
+
+.modeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.modeCard {
+  display: grid;
+  min-height: 3.4rem;
+  justify-items: center;
+  align-content: center;
+  gap: 0.2rem;
+  border-radius: 0.7rem;
+  color: #5e6663;
+  font-size: 0.66rem;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eff0ed;
+}
+
+.back {
+  min-height: 2.8rem;
+  padding: 0.55rem 0.8rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: transparent;
+  color: #686f6c;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.back:hover {
+  background: #f3f4f1;
+  color: #303936;
+}
+
+.errorNote {
+  margin: 0.9rem 0 0;
+  color: #9d2d21;
+  font-size: 0.75rem;
+}
+
+.comingShell {
+  width: min(54rem, 100%);
+  margin: 0 auto;
+}
+
+.comingCard {
+  display: grid;
+  justify-items: start;
+  padding: clamp(2rem, 6vw, 4.5rem);
+  border: 1px solid #e1e3e1;
+  border-radius: 1.5rem;
+  background: #fffefa;
+  box-shadow: 0 24px 70px rgb(30 41 40 / 9%);
+}
+
+.comingMark {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  background: #f6eee7;
+  color: #c0392b;
+  font-size: 1.6rem;
+}
+
+.comingCard h1 {
+  max-width: 38rem;
+  margin: 0.75rem 0 0;
+  color: #202827;
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.comingCard .description {
+  max-width: 35rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.comingCard .localNote {
+  margin-top: 0;
+}
+
+.comingActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.6rem;
+}
+
+.comingActions .back {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.summaryCard {
+  gap: 1.15rem;
+}
+
+.summaryHeader {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.summaryHeader h1 {
+  max-width: 38rem;
+  margin: 0.75rem 0 0;
+  color: #202827;
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.summaryHeader .description {
+  max-width: 35rem;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+.summarySpark {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 1rem;
+  background: #f6eee7;
+  color: #c0392b;
+  font-size: 1.6rem;
+}
+
+.summaryCourse {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem;
+  border: 1px solid #e8e3d8;
+  border-radius: 0.9rem;
+  background: #f8f6f0;
+}
+
+.summaryCourseMark {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.8rem;
+  background: #eae2d4;
+  color: #744f3d;
+  font-family: var(--font-jp);
+  font-size: 1.25rem;
+}
+
+.summaryCourseText {
+  min-width: 0;
+  margin-right: auto;
+}
+
+.summaryCourseText p {
+  margin: 0 0 0.15rem;
+  color: #858b88;
+  font-size: 0.64rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.summaryCourseText h2 {
+  margin: 0;
+  color: #202827;
+  font-size: 1.05rem;
+}
+
+.summaryDetails {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.summaryItem {
+  min-width: 0;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #e8e6e0;
+  border-radius: 0.75rem;
+  background: #fffefa;
+}
+
+.summaryItem dt {
+  margin-bottom: 0.28rem;
+  color: #858b88;
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.summaryItem dd {
+  margin: 0;
+  color: #303936;
+  font-size: 0.84rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 0.75rem;
+  }
+
+  .layout {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .visualPanel {
+    min-height: 17rem;
+    padding: 1.5rem;
+  }
+
+  .visualPanel h1 {
+    max-width: 34rem;
+    margin-top: 0.7rem;
+    font-size: clamp(1.7rem, 7vw, 2.5rem);
+  }
+
+  .visualNote {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .wordOrbit {
+    position: absolute;
+    right: -1rem;
+    bottom: -7rem;
+    width: 13rem;
+    opacity: 0.58;
+  }
+
+  .visualFooter {
+    position: relative;
+    z-index: 1;
+    margin-top: 1.2rem;
+  }
+
+  .formPanel {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    min-height: 3.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .brandMark {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.65rem;
+  }
+
+  .languageControl > span {
+    display: none;
+  }
+
+  .headerActions {
+    gap: 0.35rem;
+  }
+
+  .visualPanel {
+    min-height: 14rem;
+  }
+
+  .visualFooter span:last-child {
+    max-width: 9rem;
+    text-align: right;
+  }
+
+  .formPanel {
+    padding: 1.15rem;
+  }
+
+  .languageGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .languageCard {
+    min-height: 6rem;
+  }
+
+  .modeGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .comingCard {
+    padding: 1.5rem;
+  }
+
+  .summaryHeader {
+    gap: 0.5rem;
+  }
+
+  .summarySpark {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+
+  .summaryDetails {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .comingActions {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .comingActions > * {
+    width: 100%;
+  }
+}
+
+:global(html[data-theme="dark"]) .page {
+  background: #171d21;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .brand,
+:global(html[data-theme="dark"]) .formPanel h2,
+:global(html[data-theme="dark"]) .comingCard h1 {
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .layout,
+:global(html[data-theme="dark"]) .comingCard {
+  border-color: #354147;
+  background: #222b30;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 22%);
+}
+
+:global(html[data-theme="dark"]) .languageControl {
+  color: #b7bfbe;
+}
+
+:global(html[data-theme="dark"]) .languageSwitch {
+  border-color: #3c464b;
+  background: #151c20;
+}
+
+:global(html[data-theme="dark"]) .languageSwitch button {
+  color: #c1c5c2;
+}
+
+:global(html[data-theme="dark"]) .languageSwitch button[aria-pressed="true"] {
+  background: #323b40;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .stepPill,
+:global(html[data-theme="dark"]) .comingMark {
+  background: #382d2a;
+  color: #f0a08d;
+}
+
+:global(html[data-theme="dark"]) .introText {
+  color: #e1ded7;
+}
+
+:global(html[data-theme="dark"]) .localNote,
+:global(html[data-theme="dark"]) .stepCount,
+:global(html[data-theme="dark"]) .description,
+:global(html[data-theme="dark"]) .levelCard span,
+:global(html[data-theme="dark"]) .timeCard span {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .stepTrack {
+  background: #394348;
+}
+
+:global(html[data-theme="dark"]) .languageCard,
+:global(html[data-theme="dark"]) .choiceCard,
+:global(html[data-theme="dark"]) .levelCard,
+:global(html[data-theme="dark"]) .timeCard,
+:global(html[data-theme="dark"]) .modeCard,
+:global(html[data-theme="dark"]) .goalChip {
+  border-color: #3c474c;
+  background: #293237;
+  color: #e0dfd8;
+}
+
+:global(html[data-theme="dark"]) .languageCard:hover,
+:global(html[data-theme="dark"]) .choiceCard:hover,
+:global(html[data-theme="dark"]) .levelCard:hover,
+:global(html[data-theme="dark"]) .timeCard:hover,
+:global(html[data-theme="dark"]) .modeCard:hover,
+:global(html[data-theme="dark"]) .goalChip:hover {
+  border-color: #bd7968;
+}
+
+:global(html[data-theme="dark"]) .languageNative {
+  color: #d3b49b;
+}
+
+:global(html[data-theme="dark"]) .comingSoon {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .available {
+  color: #9dc79d;
+}
+
+:global(html[data-theme="dark"]) .selected {
+  border-color: #e07a68 !important;
+  background: #382d2a !important;
+  color: #f2ded4;
+  box-shadow: 0 0 0 1px #e07a68;
+}
+
+:global(html[data-theme="dark"]) .goalSelected,
+:global(html[data-theme="dark"]) .modeSelected {
+  border-color: #e07a68 !important;
+  background: #382d2a !important;
+  color: #f0ad86 !important;
+}
+
+:global(html[data-theme="dark"]) .fieldLabel {
+  color: #c4c6bf;
+}
+
+:global(html[data-theme="dark"]) .textInput {
+  border-color: #465158;
+  background: #1b2327;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .textInput::placeholder {
+  color: #909b9c;
+}
+
+:global(html[data-theme="dark"]) .textInput:focus-visible {
+  outline-color: #a9bad4;
+}
+
+:global(html[data-theme="dark"]) .timeCard span {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .navigation {
+  border-color: #394348;
+}
+
+:global(html[data-theme="dark"]) .back {
+  color: #c2c6c2;
+}
+
+:global(html[data-theme="dark"]) .back:hover {
+  background: #30393e;
+  color: #f2eee6;
+}
+
+:global(html[data-theme="dark"]) .errorNote {
+  color: #f0a08d;
+}
+
+:global(html[data-theme="dark"]) .summarySpark {
+  background: #382d2a;
+  color: #f0a08d;
+}
+
+:global(html[data-theme="dark"]) .summaryCourse {
+  border-color: #3c474c;
+  background: #293237;
+}
+
+:global(html[data-theme="dark"]) .summaryCourseMark {
+  background: #3a3831;
+  color: #ead2b7;
+}
+
+:global(html[data-theme="dark"]) .summaryCourseText p,
+:global(html[data-theme="dark"]) .summaryItem dt {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .summaryCourseText h2,
+:global(html[data-theme="dark"]) .summaryItem dd {
+  color: #e0dfd8;
+}
+
+:global(html[data-theme="dark"]) .summaryItem {
+  border-color: #3c474c;
+  background: #252e34;
+}

@@ -1,0 +1,46 @@
+/* Design tokens — single source of truth for the look of the app. */
+:root {
+  /* Washi paper + sumi ink + vermilion (shu) */
+  --paper: #f6f1e7;
+  --paper-deep: #ece4d3;
+  --ink: #1c1b1a;
+  --ink-soft: #5a554d;
+  --line: #d9cfba;
+  --shu: #c0392b;
+  --shu-deep: #9d2d21;
+  --ai: #2b3a55;
+  color-scheme: light;
+
+  /* Type */
+  --font-jp: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
+  --font-hi: "Noto Sans Devanagari", "Nirmala UI", "Kohinoor Devanagari", "Mangal", system-ui, sans-serif;
+  --font-body: system-ui, var(--font-hi), sans-serif;
+
+  --text-sm: 0.9rem;
+  --text-md: 1.05rem;
+  --text-lg: 1.35rem;
+  --text-xl: clamp(1.9rem, 6vw, 2.8rem);
+  --text-kanji: clamp(7rem, 32vw, 14rem);
+
+  /* Space */
+  --s-1: 0.5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2.5rem;
+  --s-5: 4rem;
+
+  --radius: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #171d21;
+  --paper-deep: #30393e;
+  --ink: #e8e4dc;
+  --ink-soft: #b7b7b0;
+  --line: #465158;
+  --shu: #e07a68;
+  --shu-deep: #f0a08d;
+  --ai: #a9bad4;
+}

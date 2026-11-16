@@ -1,0 +1,110 @@
+.soundGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.soundCard {
+  display: grid;
+  min-width: 0;
+  min-height: 7rem;
+  align-content: center;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 0.65rem 0.35rem;
+  border: 1px solid #e8dfd0;
+  border-radius: 0.85rem;
+  background: #fffdf8;
+  color: #273642;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+  animation: soundArrive 420ms both;
+}
+
+.soundCard:hover {
+  transform: translateY(-4px) rotate(-1deg);
+  border-color: #d7a58f;
+  background: #fff8f1;
+  box-shadow: 0 10px 24px rgb(75 54 37 / 10%);
+}
+
+.soundCard[aria-pressed="true"] {
+  transform: translateY(-2px);
+  border-color: #c85c48;
+  background: #fff2e9;
+  box-shadow: 0 0 0 3px rgb(200 57 43 / 9%);
+}
+
+.character {
+  color: #9d382e;
+  font-family: inherit;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.reading {
+  min-height: 1rem;
+  color: #7e7569;
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.audioNotice {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #7e5d43;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+:global(html[data-theme="dark"]) .soundCard {
+  border-color: #3c474c;
+  background: #293237;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .soundCard:hover {
+  border-color: #ad6d5f;
+  background: #34383a;
+}
+
+:global(html[data-theme="dark"]) .soundCard[aria-pressed="true"] {
+  border-color: #e07a68;
+  background: #382d2a;
+}
+
+:global(html[data-theme="dark"]) .character {
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .reading,
+:global(html[data-theme="dark"]) .audioNotice {
+  color: #b7bfbe;
+}
+
+@keyframes soundArrive {
+  from {
+    opacity: 0;
+    transform: translateY(0.65rem) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 520px) {
+  .soundGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .soundCard {
+    min-height: 5.5rem;
+  }
+}

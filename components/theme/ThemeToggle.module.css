@@ -1,0 +1,83 @@
+.control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #e8e3d8;
+  border-radius: 0.65rem;
+  background: #fffdf8;
+  color: #5d5549;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.button:hover {
+  border-color: #d7b6a8;
+  background: #fff8f4;
+  color: var(--shu-deep);
+}
+
+.button > span:first-child {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.status {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 5;
+  width: max-content;
+  max-width: min(18rem, 80vw);
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #b65a4e;
+  border-radius: 0.4rem;
+  background: #fff8f4;
+  color: #742d25;
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+:global(html[data-theme="dark"]) .button {
+  border-color: #465158;
+  background: #252e34;
+  color: #e4e0d7;
+}
+
+:global(html[data-theme="dark"]) .button:hover {
+  border-color: #bd7968;
+  background: #30373b;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .status {
+  border-color: #8e564e;
+  background: #392b2b;
+  color: #f0b5aa;
+}
+
+@media (max-width: 520px) {
+  .button {
+    min-height: 2rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.68rem;
+  }
+
+  .label {
+    display: none;
+  }
+}

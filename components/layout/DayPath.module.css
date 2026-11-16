@@ -1,0 +1,21 @@
+.path {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.tick,
+.done {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius);
+}
+
+.tick {
+  background: var(--line);
+}
+
+.done {
+  background: var(--shu);
+}
