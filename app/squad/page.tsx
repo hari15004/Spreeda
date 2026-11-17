@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 type Squad = { id: string; name: string; invite_code: string; owner_id: string };
 type Row = { id: string; name: string; lang: string; streak: number; xp: number; day: number };
 
-const LANGS = ["japanese", "french", "german", "english", "spanish"];
+const LANGS = ["japanese", "spanish", "french", "german", "english", "korean", "chinese"];
 
 function todayIST() {
   return new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
@@ -55,6 +55,7 @@ export default function SquadPage() {
     if (ids.length === 0) {
       setSquads([]);
       setActive(null);
+      setRows([]);
       return;
     }
 
@@ -167,6 +168,24 @@ export default function SquadPage() {
     await loadSquads();
   }
 
+  async function leaveSquad() {
+    if (!active || !me) return;
+    if (!window.confirm(`"${active.name}" squad chhodna hai?`)) return;
+    setMsg("");
+    const { data, error } = await supabase
+      .from("squad_members")
+      .delete()
+      .eq("squad_id", active.id)
+      .eq("user_id", me)
+      .select("user_id");
+    if (error || !data || data.length === 0) {
+      setMsg("Squad chhod nahi paaye, dobara try karo.");
+      return;
+    }
+    setActive(null);
+    await loadSquads();
+  }
+
   const box: React.CSSProperties = {
     padding: "10px 12px",
     borderRadius: 10,
@@ -244,9 +263,13 @@ export default function SquadPage() {
             <p style={{ opacity: 0.7, margin: "4px 0 14px" }}>
               Invite code: <b>{active.invite_code}</b> ({rows.length}/6)
             </p>
-            {active.owner_id === me && (
+            {active.owner_id === me ? (
               <button onClick={deleteSquad} style={{ ...btn, background: "#8b2d2d", marginBottom: 14 }}>
                 Squad delete karo
+              </button>
+            ) : (
+              <button onClick={leaveSquad} style={{ ...btn, background: "#2a2a3a", marginBottom: 14 }}>
+                Squad chhodo
               </button>
             )}
             {rows.map((r, i) => (

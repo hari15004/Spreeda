@@ -466,9 +466,17 @@ export default function HomePage() {
 
     if (passed) {
       const dbLanguage =
-        activeCourse.targetLanguageCode === "ja"
-          ? "japanese"
-          : activeCourse.targetLanguageCode;
+        (
+          {
+            ja: "japanese",
+            es: "spanish",
+            fr: "french",
+            de: "german",
+            en: "english",
+            ko: "korean",
+            zh: "chinese",
+          } as Record<string, string>
+        )[activeCourse.targetLanguageCode] ?? activeCourse.targetLanguageCode;
       const supabase = createClient();
       void supabase
         .rpc("complete_lesson", {

@@ -13,6 +13,20 @@ export default function LoginPage() {
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
 
+  async function googleLogin() {
+    setMsg("");
+    setBusy(true);
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/` },
+    });
+    if (error) {
+      setBusy(false);
+      setMsg("Google login शुरू नहीं हो पाया। दोबारा कोशिश करो।");
+    }
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setMsg("");
@@ -25,7 +39,7 @@ export default function LoginPage() {
     setBusy(true);
     const supabase = createClient();
 
-    const { error } =
+    const { data, error } =
       mode === "signup"
         ? await supabase.auth.signUp({
             email,
@@ -42,6 +56,13 @@ export default function LoginPage() {
           ? "साइन अप नहीं हो पाया। ईमेल चेक करो या दोबारा कोशिश करो।"
           : "ईमेल या पासवर्ड गलत है।"
       );
+      return;
+    }
+
+    if (mode === "signup" && !data.session) {
+      setMode("login");
+      setPassword("");
+      setMsg("अकाउंट बन गया। अब login करो।");
       return;
     }
 
@@ -85,6 +106,28 @@ export default function LoginPage() {
         <p style={{ opacity: 0.7, marginBottom: 20 }}>
           {mode === "login" ? "Wapas aao, streak mat todna." : "Naya account banao."}
         </p>
+
+        <button
+          type="button"
+          onClick={googleLogin}
+          disabled={busy}
+          style={{
+            width: "100%",
+            padding: 13,
+            borderRadius: 10,
+            border: "1px solid #3a3a4a",
+            background: "#fff",
+            color: "#1b1b28",
+            fontSize: 16,
+            fontWeight: 700,
+            cursor: "pointer",
+            marginBottom: 16,
+          }}
+        >
+          Continue with Google
+        </button>
+
+        <p style={{ textAlign: "center", opacity: 0.5, marginBottom: 16 }}>ya email se</p>
 
         {mode === "signup" && (
           <input

@@ -1,10 +1,12 @@
 # TASKS.md
 
 ## Phase 0 — Foundation
+
 - [x] Project folder + docs created
 - [x] Review docs with owner
 
 ## Phase 1 — Setup
+
 - [x] Next.js + TypeScript scaffold
 - [x] Folder structure per ARCHITECTURE.md
 - [x] Design tokens (colors, font stacks incl. Devanagari + Japanese)
@@ -19,24 +21,31 @@
 - [x] lint / typecheck / build passing
 
 ## Phase 2 — Backend
-- [ ] Supabase project + env setup
-- [ ] Auth (signup/login)
-- [ ] Tables + RLS policies
-- [ ] Progress save/load
+
+- [x] Supabase project + env setup
+- [x] Auth: email+password signup/login (no email verification) + Google login
+- [x] Tables + RLS policies (supabase/schema.sql, 002, 003, 004 SQL files)
+- [x] Squads: create / join by code / leave / owner delete, leaderboard
+- [x] Lesson pass (80%) + retry; complete_lesson RPC syncs streak/XP/unlocked day
+- [ ] Progress load from Supabase on a new device (not verified)
+- [ ] Server-side score validation (score currently comes from the client)
 
 ## Phase 3 — Lessons Day 1–5
+
 - [x] Day 1 lesson data (five hiragana vowels)
-- [ ] Day 1–5 content (hiragana + greetings)
+- [x] 30-lesson course structure for ja, en, es, fr, ko, de, zh (content quality not reviewed)
 - [x] Lesson player UI + browser speech audio (Day 1)
 
 ## Phase 4 — Tests & Revision
+
 - [x] Day 1 five-question check integrated into the lesson
 - [ ] Reusable quick test engine
 - [ ] Weak-item tracking
 - [ ] Revision session
 
 ## Phase 5 — Voice + Finish
+
 - [ ] Speaking practice
-- [ ] Days 6–30 content
+- [ ] Days 6–30 content review
 - [ ] Day 30 challenge
 - [ ] Security review + deploy
