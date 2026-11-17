@@ -326,6 +326,60 @@ export default function HomePage() {
     nextUncompletedLesson ??
     activeCourse.lessons[activeCourse.lessons.length - 1];
   const targetLanguage = languages[activeCourse.targetLanguageCode];
+
+  useEffect(() => {
+    let cancelled = false;
+    const dbNames: Record<string, string> = {
+      ja: "japanese",
+      es: "spanish",
+      fr: "french",
+      de: "german",
+      en: "english",
+      ko: "korean",
+      zh: "chinese",
+    };
+    const dbLanguage =
+      dbNames[activeCourse.targetLanguageCode] ?? activeCourse.targetLanguageCode;
+
+    async function restoreFromSupabase() {
+      try {
+        const supabase = createClient();
+        const { data: auth } = await supabase.auth.getUser();
+        if (!auth.user || cancelled) return;
+        const { data: row } = await supabase
+          .from("streaks")
+          .select("unlocked_day")
+          .eq("user_id", auth.user.id)
+          .eq("language", dbLanguage)
+          .maybeSingle();
+        if (!row || cancelled) return;
+
+        const unlockedDay = Number(row.unlocked_day) || 1;
+        const restoredIds = activeCourse.lessons
+          .filter((lesson) => lesson.sequence < unlockedDay)
+          .map((lesson) => lesson.id);
+        const current = readProgress(window.localStorage.getItem(progressKey) ?? "");
+        const merged = [...new Set([...current.completedLessonIds, ...restoredIds])];
+        if (merged.length === current.completedLessonIds.length) return;
+
+        const nextProgress: SavedProgress = {
+          ...current,
+          completedLessonIds: merged,
+          completed: merged.includes(coursesById.japanese.lessons[0].id),
+        };
+        setSessionProgress(nextProgress);
+        window.localStorage.setItem(progressKey, JSON.stringify(nextProgress));
+        window.dispatchEvent(new Event("nihongo-progress-change"));
+      } catch {
+        // restore fail ho to local progress hi chalta rahe
+      }
+    }
+
+    void restoreFromSupabase();
+    return () => {
+      cancelled = true;
+    };
+  }, [activeCourse]);
   const storedLanguage = useSyncExternalStore(
     subscribeToLanguage,
     getLanguageSnapshot,
@@ -483,9 +537,35 @@ export default function HomePage() {
           p_language: dbLanguage,
           p_day: lessonToPlay.sequence,
           p_score: percent,
+          p_tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata",
         })
-        .then(({ error }) => {
-          if (error) console.warn("Supabase sync:", error.message);
+        .then(({ data, error }) => {
+          if (error) {
+            console.warn("Supabase sync:", error.message);
+            return;
+          }
+          const row = Array.isArray(data) ? data[0] : data;
+          if (
+            !row ||
+            typeof row.current_streak !== "number" ||
+            typeof row.last_active_day !== "string"
+          )
+            return;
+          try {
+            const latest = readProgress(
+              window.localStorage.getItem(progressKey) ?? "",
+            );
+            const synced: SavedProgress = {
+              ...latest,
+              streak: row.current_streak,
+              lastStudyDate: row.last_active_day,
+            };
+            setSessionProgress(synced);
+            window.localStorage.setItem(progressKey, JSON.stringify(synced));
+            window.dispatchEvent(new Event("nihongo-progress-change"));
+          } catch {
+            // local progress hi chalta rahe
+          }
         });
     }
   }
