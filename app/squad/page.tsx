@@ -5,7 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
 type Squad = { id: string; name: string; invite_code: string; owner_id: string };
-type Row = { id: string; name: string; lang: string; streak: number; xp: number; day: number };
+type Row = { id: string; name: string; lang: string; streak: number; xp: number; day: number; me: boolean; lastDay: string | null; restoreNeed: number; restoreDone: number; lost: number };
 
 const LANGS = ["japanese", "spanish", "french", "german", "english", "korean", "chinese"];
 
@@ -18,6 +18,8 @@ function yesterdayIST() {
   d.setUTCDate(d.getUTCDate() - 1);
   return d.toISOString().slice(0, 10);
 }
+
+import StreakBars from "./StreakBars";
 
 export default function SquadPage() {
   const [supabase] = useState(() => createClient());
@@ -85,7 +87,7 @@ export default function SquadPage() {
         supabase.from("profiles").select("id, display_name, learning_language").in("id", ids),
         supabase
           .from("streaks")
-          .select("user_id, language, current_streak, last_active_day, total_xp, unlocked_day")
+          .select("user_id, language, current_streak, last_active_day, total_xp, unlocked_day, restore_need, restore_done, lost_streak")
           .in("user_id", ids),
       ]);
 
@@ -102,6 +104,11 @@ export default function SquadPage() {
           streak: alive ? s.current_streak : 0,
           xp: s?.total_xp ?? 0,
           day: s?.unlocked_day ?? 1,
+          me: id === me,
+          lastDay: s?.last_active_day ?? null,
+          restoreNeed: s?.restore_need ?? 0,
+          restoreDone: s?.restore_done ?? 0,
+          lost: s?.lost_streak ?? 0,
         };
       });
       out.sort((a, b) => b.streak - a.streak || b.xp - a.xp);
@@ -272,6 +279,7 @@ export default function SquadPage() {
                 Squad chhodo
               </button>
             )}
+            <StreakBars rows={rows} meId={me} />
             {rows.map((r, i) => (
               <div
                 key={r.id}
