@@ -96,6 +96,9 @@ export function LessonPlayer({
   }, []);
 
   const currentQuestion = lesson.questions[questionIndex];
+  const total = lesson.questions.length;
+  const passed = Math.round((score / total) * 100) >= 80;
+  const needed = Math.ceil(total * 0.8);
 
   function saveCheckpoint(
     nextPhase: "learn" | "quiz",
@@ -159,6 +162,17 @@ export function LessonPlayer({
     setQuestionIndex(nextQuestionIndex);
     setAnswer(null);
     saveCheckpoint("quiz", nextQuestionIndex, null, score);
+  }
+
+  function retryQuiz() {
+    previousDurationRef.current = 0;
+    lessonStartedAtRef.current = performance.now();
+    setQuestionIndex(0);
+    setAnswer(null);
+    setScore(0);
+    setSpeechMessage("");
+    setPhase("quiz");
+    saveCheckpoint("quiz", 0, null, 0);
   }
 
   return (
@@ -377,8 +391,19 @@ export function LessonPlayer({
                 : t.keepPracticing}
             </p>
             <p className={styles.streakMessage} role="status">
-              {t.streakLine.replace("{count}", String(currentStreak))}
+              {passed
+                ? language === "en"
+                  ? "Passed! Next day unlocked."
+                  : "पास! अगला दिन खुल गया।"
+                : language === "en"
+                  ? `You need at least ${needed} of ${total} correct to unlock the next day. Try again!`
+                  : `अगला दिन खोलने के लिए कम से कम ${needed} / ${total} सही चाहिए। फिर से कोशिश करो!`}
             </p>
+            {passed && (
+              <p className={styles.streakMessage}>
+                {t.streakLine.replace("{count}", String(currentStreak))}
+              </p>
+            )}
             <div className={styles.resultList}>
               {lesson.items.map((item) => (
                 <button
@@ -398,6 +423,12 @@ export function LessonPlayer({
               <p className={styles.notice} role="status">
                 {speechMessage}
               </p>
+            )}
+            {!passed && (
+              <button type="button" className={styles.primary} onClick={retryQuiz}>
+                {language === "en" ? "Try again" : "फिर से कोशिश करो"}{" "}
+                <span aria-hidden="true">→</span>
+              </button>
             )}
             <button type="button" className={styles.primary} onClick={closeLesson}>
               {t.return} <span aria-hidden="true">→</span>

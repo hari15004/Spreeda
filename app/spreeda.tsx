@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { AccountMenu } from "@/components/account/AccountMenu";
 import { DayPath } from "@/components/layout/DayPath";
 import { LessonPlayer } from "@/components/lesson/LessonPlayer";
 import {
@@ -20,6 +21,7 @@ import {
   learnerProfileKey,
   parseLearnerProfile,
 } from "@/lib/learner-profile";
+import { createClient } from "@/lib/supabase/client";
 import styles from "./spreeda.module.css";
 
 const progressKey = "nihongo-learning-progress";
@@ -414,26 +416,31 @@ export default function HomePage() {
     }
   }
 
-  function completeLesson(_score: number, durationSeconds: number) {
+  function completeLesson(score: number, durationSeconds: number) {
     const now = new Date();
     const today = localDateKey(now);
     const previousDate = progress.lastStudyDate;
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
-    const nextStreak =
-      previousDate === today
+
+    const percent = Math.round((score / lessonToPlay.questions.length) * 100);
+    const passed = percent >= 80;
+
+    const nextStreak = !passed
+      ? progress.streak
+      : previousDate === today
         ? progress.streak
         : previousDate === localDateKey(yesterday)
           ? progress.streak + 1
           : 1;
-    const completedLessonIds = [
-      ...new Set([...progress.completedLessonIds, lessonToPlay.id]),
-    ];
+    const completedLessonIds = passed
+      ? [...new Set([...progress.completedLessonIds, lessonToPlay.id])]
+      : progress.completedLessonIds;
     const nextProgress: SavedProgress = {
       schemaVersion: 2,
       completed: completedLessonIds.includes(coursesById.japanese.lessons[0].id),
       streak: nextStreak,
-      lastStudyDate: today,
+      lastStudyDate: passed ? today : progress.lastStudyDate,
       completedLessonIds,
       lessonCheckpoint: null,
       activities: [
@@ -455,6 +462,23 @@ export default function HomePage() {
       setSaveStatus("saved");
     } catch {
       setSaveStatus("error");
+    }
+
+    if (passed) {
+      const dbLanguage =
+        activeCourse.targetLanguageCode === "ja"
+          ? "japanese"
+          : activeCourse.targetLanguageCode;
+      const supabase = createClient();
+      void supabase
+        .rpc("complete_lesson", {
+          p_language: dbLanguage,
+          p_day: lessonToPlay.sequence,
+          p_score: percent,
+        })
+        .then(({ error }) => {
+          if (error) console.warn("Supabase sync:", error.message);
+        });
     }
   }
 
@@ -641,6 +665,7 @@ export default function HomePage() {
                 </button>
               </div>
             </div>
+            <AccountMenu language={language} />
             <ThemeToggle language={language} />
           </div>
           {languageSaveError && (
