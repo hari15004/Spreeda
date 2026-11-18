@@ -1,0 +1,120 @@
+.section {
+  display: grid;
+  gap: 1.1rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid #e8e1d6;
+  border-radius: 1rem;
+  background: #fffdf8;
+  box-shadow: 0 8px 26px rgb(28 27 26 / 4%);
+}
+
+.heading .eyebrow {
+  margin: 0 0 0.3rem;
+  color: #a64b3c;
+  font-size: 0.67rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+.heading h2 {
+  margin: 0;
+  color: #292e30;
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  line-height: 1.25;
+}
+
+.heading > p:last-child {
+  margin: 0.35rem 0 0;
+  color: #777064;
+  font-size: 0.82rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.option {
+  display: grid;
+  min-width: 0;
+  min-height: 6.7rem;
+  justify-items: center;
+  align-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.25rem;
+  border: 1px solid #e9e3da;
+  border-radius: 0.9rem;
+  background: #fcfaf5;
+  color: #514a42;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.option:hover {
+  transform: translateY(-2px);
+  border-color: #cf9a84;
+  box-shadow: 0 8px 18px rgb(72 50 41 / 9%);
+}
+
+.selected {
+  border-color: #b94d3c;
+  background: #fff4ed;
+  box-shadow: 0 0 0 2px rgb(185 77 60 / 16%);
+  color: #8f352a;
+}
+
+.avatar {
+  display: block;
+  width: 3.4rem;
+  height: 3.4rem;
+}
+
+:global(html[data-theme="dark"]) .section {
+  border-color: #354147;
+  background: #222b30;
+}
+
+:global(html[data-theme="dark"]) .heading h2 {
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .heading > p:last-child {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .option {
+  border-color: #3c474c;
+  background: #293237;
+  color: #e0dfd8;
+}
+
+:global(html[data-theme="dark"]) .selected {
+  border-color: #e07a68;
+  background: #382d2a;
+  color: #f0ad86;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(5, minmax(3.2rem, 1fr));
+    gap: 0.4rem;
+  }
+
+  .option {
+    min-height: 5.75rem;
+    padding: 0.4rem 0.1rem;
+    font-size: 0.68rem;
+  }
+
+  .avatar {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}

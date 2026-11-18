@@ -16,6 +16,7 @@ Multilingual language-learning platform. The website is the first priority, defa
 10. Mobile + desktop must both work, always.
 11. No dead code, duplicate code, unused imports, leftover files.
 12. Before creating any new file/component, say what it does and what it affects.
+13. At the end of each task, give a concise blue-text summary of the work completed and relevant validation results.
 
 ## Session start checklist
 1. Read PROJECT_RULES.md

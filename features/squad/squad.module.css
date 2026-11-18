@@ -1,0 +1,823 @@
+.page {
+  min-height: 100vh;
+  padding: 1.25rem 1rem 3rem;
+  background: #f5f3ed;
+  color: #242722;
+  font-size: 0.9rem;
+}
+
+.frame {
+  width: min(100%, 1080px);
+  margin: 0 auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 2.5rem;
+}
+
+.backLink {
+  color: #73766f;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: #252a25;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #252a25;
+  font-size: 0.85rem;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.wordmarkIcon {
+  display: grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  place-items: center;
+  border-radius: 0.5rem;
+  background: #293d32;
+  color: #fffdf6;
+  font-size: 0.9rem;
+}
+
+.pageHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2rem 0 1.25rem;
+}
+
+.pageHeading h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 680;
+  letter-spacing: -0.055em;
+  line-height: 1.15;
+}
+
+.pageHeading p {
+  margin: 0.35rem 0 0;
+  color: #777a72;
+  font-size: 0.88rem;
+}
+
+.memberLimit {
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #e1ddd2;
+  border-radius: 99px;
+  color: #6f736b;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.message {
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #edc9bd;
+  border-radius: 0.65rem;
+  background: #fff3ef;
+  color: #963d2f;
+  font-size: 0.84rem;
+}
+
+.squadSwitcher {
+  display: flex;
+  gap: 0.45rem;
+  margin: 0 0 0.8rem;
+  overflow-x: auto;
+}
+
+.switcherButton {
+  min-height: 2.2rem;
+  padding: 0 0.8rem;
+  border: 1px solid #e1ddd2;
+  border-radius: 99px;
+  background: #fffdf8;
+  color: #666b63;
+  font: inherit;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.switcherButton:hover,
+.switcherActive {
+  border-color: #405b48;
+  background: #e9eee7;
+  color: #293d32;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  align-items: start;
+  gap: 1rem;
+}
+
+.mainColumn,
+.sideColumn {
+  min-width: 0;
+}
+
+.squadPanel,
+.languageCard,
+.emptyState,
+.actionCard {
+  border: 1px solid #e6e2d8;
+  border-radius: 0.9rem;
+  background: #fffefa;
+  box-shadow: 0 5px 18px rgb(52 48 36 / 4%);
+}
+
+.squadPanel {
+  padding: 1.2rem;
+}
+
+.squadHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.titleLine {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.titleLine h2 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 1.35rem;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.adminBadge {
+  padding: 0.2rem 0.45rem;
+  border-radius: 99px;
+  background: #eef0e9;
+  color: #53644f;
+  font-size: 0.66rem;
+  font-weight: 650;
+}
+
+.quietButton,
+.quietDangerButton {
+  flex: 0 0 auto;
+  padding: 0.42rem 0.7rem;
+  border: 1px solid #e3dfd5;
+  border-radius: 0.55rem;
+  background: #fffefa;
+  color: #5f655e;
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.quietButton:hover {
+  background: #f3f2ec;
+}
+
+.quietDangerButton {
+  border-color: #ecd3cc;
+  color: #9c4a3b;
+}
+
+.quietDangerButton:hover {
+  background: #fff3ef;
+}
+
+.inviteCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e7e8dc;
+  border-radius: 0.7rem;
+  background: #f6f7f1;
+}
+
+.inviteCode {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.inviteCode span,
+.inputLabel {
+  color: #747a70;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.inviteCode strong {
+  color: #293d32;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+}
+
+.seatCount {
+  color: #70766e;
+  font-size: 0.76rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 0.75rem 0 1.2rem;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid #ebe7de;
+  border-radius: 0.65rem;
+  background: #fffefa;
+}
+
+.statCard > span {
+  color: #73776f;
+  font-size: 0.72rem;
+}
+
+.statCard strong {
+  color: #293d32;
+  font-size: 1.18rem;
+  font-weight: 680;
+  white-space: nowrap;
+}
+
+.statCard small {
+  color: #858980;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.leaderboardCard {
+  padding-top: 0.2rem;
+}
+
+.cardHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  padding: 0.55rem 0 0.65rem;
+  border-bottom: 1px solid #eeebe4;
+}
+
+.cardHeading h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.cardHeading > span {
+  color: #84877f;
+  font-size: 0.7rem;
+}
+
+.leaderboard {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learnerRow {
+  display: grid;
+  grid-template-columns: 1.3rem 2rem minmax(0, 1fr) 3.2rem auto;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  padding: 0.78rem 0.35rem;
+  border-bottom: 1px solid #f0eee8;
+}
+
+.learnerMe {
+  background: #f7f8f2;
+}
+
+.rankNumber {
+  color: #8a8e85;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.learnerAvatar {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #e9eee7;
+  color: #344c39;
+  font-size: 0.78rem;
+  font-weight: 680;
+}
+
+.learnerDetails {
+  display: grid;
+  min-width: 0;
+  gap: 0.22rem;
+}
+
+.learnerDetails > strong {
+  overflow: hidden;
+  color: #30332e;
+  font-size: 0.82rem;
+  font-weight: 630;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.youBadge {
+  margin-left: 0.4rem;
+  color: #888d82;
+  font-size: 0.63rem;
+  font-weight: 500;
+}
+
+.learnerMeta {
+  overflow: hidden;
+  color: #858980;
+  font-size: 0.68rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scoreTrack {
+  display: block;
+  width: min(100%, 10rem);
+  height: 0.22rem;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #eeeee7;
+}
+
+.scoreTrack span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #829772;
+}
+
+.learnerScore {
+  display: grid;
+  justify-items: end;
+  color: #303a31;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.learnerScore small {
+  color: #898d83;
+  font-size: 0.62rem;
+  font-weight: 450;
+}
+
+.streakPill {
+  color: #876443;
+  font-size: 0.73rem;
+  white-space: nowrap;
+}
+
+.emptyLeaderboard {
+  margin: 0;
+  padding: 1.1rem 0.35rem;
+  color: #777b73;
+  font-size: 0.82rem;
+}
+
+.scoreDetails {
+  padding-top: 0.7rem;
+}
+
+.scoreDetails summary {
+  color: #62685f;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.scoreDetails p {
+  margin: 0.5rem 0 0;
+  color: #777b73;
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.languageCard {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem;
+}
+
+.languageCard p {
+  margin: 0;
+  color: #82867d;
+  font-size: 0.73rem;
+}
+
+.selectInput,
+.textInput {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.55rem;
+  padding: 0 0.7rem;
+  border: 1px solid #dedbd1;
+  border-radius: 0.55rem;
+  background: #fffefa;
+  color: #30332e;
+  font: inherit;
+  font-size: 0.82rem;
+}
+
+.selectInput:focus,
+.textInput:focus {
+  border-color: #607b61;
+  outline: 2px solid rgb(96 123 97 / 16%);
+}
+
+.emptyState {
+  padding: 1.5rem;
+}
+
+.emptyState h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 650;
+}
+
+.emptyState p {
+  margin: 0.35rem 0 0;
+  color: #777b73;
+  font-size: 0.84rem;
+}
+
+.joinSection {
+  margin-top: 1rem;
+}
+
+.joinSection > h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.actionCard {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.9rem;
+}
+
+.actionCard h3 {
+  margin: 0 0 0.15rem;
+  font-size: 0.9rem;
+  font-weight: 630;
+}
+
+.inputRow {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 2.55rem;
+  flex: 0 0 auto;
+  padding: 0 0.85rem;
+  border: 1px solid #293d32;
+  border-radius: 0.55rem;
+  background: #293d32;
+  color: #fffefa;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 620;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primaryButton:hover {
+  background: #3a5542;
+}
+
+.secondaryButton {
+  border-color: #dedbd1;
+  background: #f4f3ed;
+  color: #3b4039;
+}
+
+.secondaryButton:hover {
+  background: #ebe9e1;
+}
+
+.loadingCard,
+.gateCard {
+  width: min(100% - 2rem, 24rem);
+  margin: 18vh auto;
+  padding: 1.6rem;
+  border: 1px solid #e6e2d8;
+  border-radius: 0.9rem;
+  background: #fffefa;
+  text-align: center;
+}
+
+.loadingCard {
+  color: #73776f;
+}
+
+.gateCard h1 {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.gateCard p {
+  margin: 0.45rem 0 0.8rem;
+  color: #777b73;
+  font-size: 0.85rem;
+}
+
+.gateCard .primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gateCard .backLink {
+  display: block;
+  margin-top: 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .contentGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sideColumn {
+    order: -1;
+  }
+
+  .languageCard {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.5rem 0.7rem;
+  }
+
+  .languageCard .inputLabel {
+    grid-column: 1;
+  }
+
+  .selectInput {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .languageCard p {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 0.85rem 0.75rem 2rem;
+  }
+
+  .pageHeading {
+    align-items: center;
+    padding: 1.6rem 0 1rem;
+  }
+
+  .pageHeading h1 {
+    font-size: 1.8rem;
+  }
+
+  .pageHeading p {
+    font-size: 0.8rem;
+  }
+
+  .memberLimit {
+    font-size: 0.65rem;
+  }
+
+  .squadPanel {
+    padding: 0.85rem;
+  }
+
+  .titleLine h2 {
+    font-size: 1.1rem;
+  }
+
+  .statsGrid {
+    gap: 0.4rem;
+  }
+
+  .statCard {
+    display: grid;
+    align-content: space-between;
+    gap: 0.4rem;
+    padding: 0.6rem;
+  }
+
+  .statCard > span {
+    font-size: 0.64rem;
+  }
+
+  .statCard strong {
+    font-size: 1rem;
+  }
+
+  .learnerRow {
+    grid-template-columns: 1rem 1.8rem minmax(0, 1fr) 2.6rem;
+    gap: 0.4rem;
+    padding: 0.7rem 0.15rem;
+  }
+
+  .learnerAvatar {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .streakPill {
+    grid-column: 3 / -1;
+    justify-self: end;
+    margin-top: -0.2rem;
+    font-size: 0.66rem;
+  }
+
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+:global(html[data-theme="dark"]) .page {
+  background: #171d21;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .wordmark,
+:global(html[data-theme="dark"]) .pageHeading h1,
+:global(html[data-theme="dark"]) .titleLine h2,
+:global(html[data-theme="dark"]) .cardHeading h3,
+:global(html[data-theme="dark"]) .learnerDetails > strong,
+:global(html[data-theme="dark"]) .learnerScore,
+:global(html[data-theme="dark"]) .emptyState h2,
+:global(html[data-theme="dark"]) .actionCard h3,
+:global(html[data-theme="dark"]) .gateCard h1 {
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .backLink,
+:global(html[data-theme="dark"]) .pageHeading p,
+:global(html[data-theme="dark"]) .memberLimit,
+:global(html[data-theme="dark"]) .cardHeading > span,
+:global(html[data-theme="dark"]) .statCard > span,
+:global(html[data-theme="dark"]) .inviteCode span,
+:global(html[data-theme="dark"]) .seatCount,
+:global(html[data-theme="dark"]) .learnerMeta,
+:global(html[data-theme="dark"]) .emptyLeaderboard,
+:global(html[data-theme="dark"]) .scoreDetails summary,
+:global(html[data-theme="dark"]) .scoreDetails p,
+:global(html[data-theme="dark"]) .languageCard p,
+:global(html[data-theme="dark"]) .inputLabel,
+:global(html[data-theme="dark"]) .learnerScore small,
+:global(html[data-theme="dark"]) .gateCard p,
+:global(html[data-theme="dark"]) .loadingCard {
+  color: #aeb6b2;
+}
+
+:global(html[data-theme="dark"]) .wordmarkIcon {
+  background: #34423a;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .squadPanel,
+:global(html[data-theme="dark"]) .languageCard,
+:global(html[data-theme="dark"]) .emptyState,
+:global(html[data-theme="dark"]) .actionCard,
+:global(html[data-theme="dark"]) .loadingCard,
+:global(html[data-theme="dark"]) .gateCard {
+  border-color: #39464c;
+  background: #20282d;
+  box-shadow: 0 5px 18px rgb(0 0 0 / 16%);
+}
+
+:global(html[data-theme="dark"]) .inviteCard,
+:global(html[data-theme="dark"]) .statCard,
+:global(html[data-theme="dark"]) .learnerMe {
+  border-color: #3a474d;
+  background: #252e34;
+}
+
+:global(html[data-theme="dark"]) .adminBadge,
+:global(html[data-theme="dark"]) .learnerAvatar {
+  background: #34423a;
+  color: #d3e2be;
+}
+
+:global(html[data-theme="dark"]) .inviteCode strong {
+  color: #d0e698;
+}
+
+:global(html[data-theme="dark"]) .statCard strong {
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .quietButton,
+:global(html[data-theme="dark"]) .switcherButton {
+  border-color: #3b474d;
+  background: #20282d;
+  color: #c3c9c4;
+}
+
+:global(html[data-theme="dark"]) .quietButton:hover,
+:global(html[data-theme="dark"]) .switcherButton:hover,
+:global(html[data-theme="dark"]) .switcherActive {
+  border-color: #718568;
+  background: #303a33;
+  color: #d0e698;
+}
+
+:global(html[data-theme="dark"]) .quietDangerButton {
+  border-color: #69453d;
+  background: #20282d;
+  color: #f0a08d;
+}
+
+:global(html[data-theme="dark"]) .quietDangerButton:hover,
+:global(html[data-theme="dark"]) .message {
+  background: #34231f;
+}
+
+:global(html[data-theme="dark"]) .message {
+  border-color: #69453d;
+  color: #ffb6a6;
+}
+
+:global(html[data-theme="dark"]) .scoreTrack {
+  background: #3a454a;
+}
+
+:global(html[data-theme="dark"]) .scoreTrack span {
+  background: #a6bd87;
+}
+
+:global(html[data-theme="dark"]) .selectInput,
+:global(html[data-theme="dark"]) .textInput {
+  border-color: #3b474d;
+  background: #171d21;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .selectInput:focus,
+:global(html[data-theme="dark"]) .textInput:focus {
+  border-color: #b9d490;
+  outline-color: rgb(185 212 144 / 20%);
+}
+
+:global(html[data-theme="dark"]) .primaryButton {
+  border-color: #d0e698;
+  background: #d0e698;
+  color: #1d271e;
+}
+
+:global(html[data-theme="dark"]) .primaryButton:hover {
+  background: #def1ac;
+}
+
+:global(html[data-theme="dark"]) .secondaryButton {
+  border-color: #3b474d;
+  background: #303a33;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .secondaryButton:hover {
+  background: #3a4840;
+}

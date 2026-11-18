@@ -1,4 +1,4 @@
-import Spreeda from "./spreeda";
+import Spreeda from "@/features/dashboard/Spreeda";
 
 export default function Page() {
   return <Spreeda />;

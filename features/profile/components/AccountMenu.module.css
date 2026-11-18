@@ -1,0 +1,123 @@
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #e8e1d6;
+  border-radius: 0.85rem;
+  background: #fcfaf5;
+}
+
+.guest {
+  margin: 0;
+  color: #777064;
+  font-size: 0.82rem;
+}
+
+.identity {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+
+.identity p,
+.identity strong {
+  display: block;
+  margin: 0;
+}
+
+.identity .eyebrow {
+  margin-bottom: 0.2rem;
+  color: #8a8175;
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.identity strong {
+  overflow: hidden;
+  color: #35322d;
+  font-size: 0.95rem;
+  text-overflow: ellipsis;
+}
+
+.logout,
+.login {
+  display: inline-flex;
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #e3c9bd;
+  border-radius: 0.65rem;
+  background: #fff6f0;
+  color: #963f32;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logout:hover,
+.login:hover {
+  border-color: #b94d3c;
+  background: #ffede3;
+}
+
+.error {
+  flex: 0 0 100%;
+  margin: 0;
+  color: #a53d32;
+  font-size: 0.75rem;
+}
+
+:global(html[data-theme="dark"]) .menu {
+  border-color: #354147;
+  background: #293237;
+}
+
+:global(html[data-theme="dark"]) .guest,
+:global(html[data-theme="dark"]) .identity .eyebrow {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .identity strong {
+  color: #e0dfd8;
+}
+
+:global(html[data-theme="dark"]) .logout,
+:global(html[data-theme="dark"]) .login {
+  border-color: #67463d;
+  background: #382d2a;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .logout:hover,
+:global(html[data-theme="dark"]) .login:hover {
+  background: #493630;
+}
+
+:global(html[data-theme="dark"]) .error {
+  color: #f0a08d;
+}
+
+@media (max-width: 520px) {
+  .menu {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,2087 @@
+.shell {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-columns: 15.5rem minmax(0, 1fr);
+  background:
+    radial-gradient(ellipse at 86% 5%, rgb(191 215 226 / 42%), transparent 28rem),
+    radial-gradient(ellipse at 17% 48%, rgb(239 219 190 / 24%), transparent 31rem),
+    linear-gradient(135deg, #f6f1e7 0%, #f5f3ee 58%, #edf3f1 100%);
+}
+
+@media (max-width: 800px) {
+  :global(html[data-theme="dark"]) .sidebar {
+    border-color: #303a40;
+    background: rgb(29 37 42 / 97%);
+    box-shadow: 0 -8px 26px rgb(0 0 0 / 22%);
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100dvh;
+  flex-direction: column;
+  padding: 2rem 1.25rem 1.35rem;
+  border-right: 1px solid #e8e3d8;
+  background: #fcfbf8;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--ink);
+  font-size: 1.25rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.brandMark {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border-radius: 0.7rem;
+  background: var(--shu);
+  color: white;
+  font-family: var(--font-jp);
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.navLabel {
+  margin: 3rem 0 0.65rem 0.65rem;
+  color: #938b7d;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.nav {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.navLink {
+  display: flex;
+  width: 100%;
+  min-height: 2.8rem;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0 0.7rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: #686258;
+  font: inherit;
+  font-size: 0.92rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.navIcon {
+  width: 1.3rem;
+  color: #8d8476;
+  text-align: center;
+}
+
+.navLink:hover,
+.navActive {
+  background: #f3ece2;
+  color: var(--shu-deep);
+}
+
+.navActive {
+  font-weight: 700;
+}
+
+.navActive span {
+  color: var(--shu);
+}
+
+.sidebarNote {
+  margin-top: auto;
+  padding: 1.1rem;
+  border: 1px solid #e9e1d3;
+  border-radius: 0.8rem;
+  background: #f6f1e7;
+}
+
+.noteMark {
+  display: block;
+  color: var(--shu);
+  font-family: var(--font-jp);
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.sidebarNote p {
+  margin: 0.65rem 0 0;
+  color: #6b6357;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.sidebarFooter {
+  margin: 1rem 0 0;
+  color: #918a7f;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.workspace {
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  min-height: 4.6rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 3.4rem;
+  border-bottom: 1px solid #e8e3d8;
+  background: rgb(252 251 248 / 92%);
+}
+
+.topbar > p {
+  margin: 0;
+  color: #766f64;
+  font-size: 0.86rem;
+}
+
+.topbar > p span {
+  margin: 0 0.45rem;
+  color: #c2b9a9;
+}
+
+.streak {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #5d5549;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.streakDot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #d78a42;
+  box-shadow: 0 0 0 0.25rem #f5eadc;
+}
+
+.topbarActions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.mobileProfileMenu {
+  display: none;
+}
+
+.languageControl {
+  display: flex;
+  align-items: center;
+}
+
+.languageSwitch {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border: 1px solid #e8e3d8;
+  border-radius: 999px;
+  background: #f3f1ec;
+}
+
+.languageSwitch button {
+  min-height: 2rem;
+  padding: 0.2rem 0.7rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #686258;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.languageSwitch button[aria-pressed="true"] {
+  background: #fffdf8;
+  color: var(--shu-deep);
+  box-shadow: 0 1px 3px rgb(28 27 26 / 10%);
+}
+
+.languageSwitch button:hover {
+  color: var(--shu-deep);
+}
+
+.profileButton {
+  min-height: 2.4rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid #e8e3d8;
+  border-radius: 0.6rem;
+  background: #fffdf8;
+  color: #5d5549;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.profileButton:hover {
+  border-color: #d7b6a8;
+  background: #fff8f4;
+  color: var(--shu-deep);
+}
+
+.previewBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e7d4be;
+  border-radius: 0.75rem;
+  background: #fff9ef;
+  color: #63523e;
+  font-size: 0.8rem;
+}
+
+.previewBanner button {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.55rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: var(--shu-deep);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.content {
+  width: min(100%, 79rem);
+  margin: 0 auto;
+  padding: 2.3rem 3.4rem 1.5rem;
+}
+
+.viewIntro {
+  max-width: 46rem;
+  margin-bottom: 0.35rem;
+}
+
+.viewIntro h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  line-height: 1.2;
+}
+
+.viewIntro > p:last-child {
+  margin: 0.55rem 0 0;
+  color: #777064;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.focusPage,
+.settingsPage {
+  display: grid;
+  gap: 1.2rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid #e8e1d6;
+  border-radius: 1.1rem;
+  background: rgb(255 253 248 / 92%);
+  box-shadow: 0 10px 28px rgb(28 27 26 / 5%);
+}
+
+.settingsCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid #e8e1d6;
+  border-radius: 0.85rem;
+  background: #fcfaf5;
+}
+
+.settingsCard h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.15rem;
+}
+
+.settingsCard p:last-child {
+  margin: 0.4rem 0 0;
+  color: #777064;
+  font-size: 0.82rem;
+}
+
+.textLink {
+  display: inline-flex;
+  min-height: 2.3rem;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.2rem;
+  border: 0;
+  background: transparent;
+  color: var(--shu-deep);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 750;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.textLink:hover span {
+  transform: translateX(0.2rem);
+}
+
+.textLink span {
+  transition: transform 160ms ease;
+}
+
+.welcome {
+  position: relative;
+  display: flex;
+  min-height: 13.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  overflow: hidden;
+  padding: 2rem clamp(1.5rem, 4vw, 2.75rem);
+  border: 1px solid #203747;
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(ellipse at 82% 15%, rgb(102 149 161 / 34%), transparent 18rem),
+    linear-gradient(115deg, #192d3c 0%, #223d4e 63%, #2d4d58 100%);
+  box-shadow: 0 14px 34px rgb(34 49 59 / 12%);
+}
+
+.dateLabel,
+.sectionEyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--shu);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+.welcome .dateLabel {
+  color: #f0ad86;
+}
+
+.welcome > div:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.courseBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  margin-bottom: 0.55rem;
+  padding: 0.15rem 0.65rem;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 8%);
+  color: #f4e7d8;
+  font-size: 0.67rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.welcome h1 {
+  max-width: 46rem;
+  margin: 0;
+  color: #fffdf8;
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  line-height: 1.25;
+}
+
+.welcome h1 span {
+  padding-left: 0.35rem;
+  color: #e7b28d;
+  font-family: var(--font-jp);
+  font-size: 0.78em;
+  font-weight: 500;
+}
+
+.welcomeText {
+  max-width: 40rem;
+  margin: 0.65rem 0 0;
+  color: #d3d9dc;
+  font-size: 0.91rem;
+}
+
+.welcomeArtwork {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.welcomeArtwork::before,
+.welcomeArtwork::after,
+.artRing {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.welcomeArtwork::before {
+  inset: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 25%);
+  content: "";
+  animation: welcomeTurn 38s linear infinite;
+}
+
+.welcomeArtwork::after {
+  inset: 2rem;
+  border: 1px dashed rgb(255 255 255 / 22%);
+  content: "";
+}
+
+.artQuote {
+  position: absolute;
+  top: -1.25rem;
+  left: 2.25rem;
+  color: #f2c5a1;
+  font-family: Georgia, serif;
+  font-size: 10rem;
+  line-height: 1;
+  opacity: 0.92;
+}
+
+.artRing {
+  inset: 1.55rem;
+  border: 1px solid rgb(255 255 255 / 28%);
+  transform: rotate(-24deg) scaleX(0.55);
+}
+
+.artSpark {
+  position: absolute;
+  top: 1.35rem;
+  right: 1.5rem;
+  color: #f0ad86;
+  font-size: 1.7rem;
+  animation: welcomeFloat 4.5s ease-in-out infinite;
+}
+
+.artBubble {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.3rem;
+  width: 2.7rem;
+  height: 2.1rem;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 1rem 1rem 0.2rem 1rem;
+  background: #aec8c1;
+  transform: rotate(12deg);
+  animation: welcomeFloat 5.5s ease-in-out infinite reverse;
+}
+
+@keyframes welcomeTurn {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes welcomeFloat {
+  from {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -0.45rem;
+  }
+
+  to {
+    translate: 0 0;
+  }
+}
+
+.learningGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(15rem, 0.9fr);
+  align-items: start;
+  gap: 1.25rem;
+}
+
+.primaryColumn,
+.rightColumn {
+  display: grid;
+  min-width: 0;
+  gap: 1.15rem;
+}
+
+.lessonCard {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #e5ddd0;
+  border-radius: 0.95rem;
+  background: #fffdf8;
+  box-shadow: 0 5px 18px rgb(28 27 26 / 4%);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.lessonCard::before {
+  position: absolute;
+  top: 0;
+  right: 1.4rem;
+  left: 1.4rem;
+  height: 0.2rem;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg, #c0392b, #e6a17d 58%, #b8d2cb);
+  content: "";
+}
+
+.lessonCardTop {
+  display: flex;
+  min-height: 2.8rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.4rem;
+  border-bottom: 1px solid #eee8dd;
+  background: #fcfaf5;
+}
+
+.dayTag,
+.timeTag {
+  color: #81796d;
+  font-size: 0.78rem;
+}
+
+.dayTag {
+  color: var(--shu-deep);
+  font-weight: 700;
+}
+
+.dayTag span {
+  padding: 0 0.25rem;
+  color: #b7ab9a;
+}
+
+.lessonCardBody {
+  display: grid;
+  min-height: 15rem;
+  grid-template-columns: minmax(0, 1fr) 11rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.6rem 1.4rem;
+}
+
+.lessonText h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  line-height: 1.35;
+}
+
+.lessonText > p:not(.sectionEyebrow):not(.saveMessage) {
+  max-width: 27rem;
+  margin: 0.55rem 0 1.1rem;
+  color: #6b665d;
+  font-size: 0.89rem;
+}
+
+.lessonText > .missionHint {
+  padding: 0.65rem 0.8rem;
+  border-left: 2px solid var(--shu);
+  background: #f5f0e7;
+}
+
+.missionHint strong {
+  color: var(--shu-deep);
+}
+
+.startButton {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--shu);
+  color: #fffdf8;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.startButton:hover {
+  transform: translateY(-1px);
+  background: var(--shu-deep);
+}
+
+.startButton span {
+  font-size: 1.1rem;
+}
+
+.saveMessage {
+  margin: 0.65rem 0 0;
+  color: #54724d;
+  font-size: 0.8rem;
+}
+
+.lessonArt {
+  position: relative;
+  display: grid;
+  min-height: 10.6rem;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background-color: #f4ede1;
+  background-image: radial-gradient(#dfd2c0 0.7px, transparent 0.7px);
+  background-size: 10px 10px;
+  color: #ad4b3b;
+  font-family: inherit;
+}
+
+.lessonArt > span {
+  z-index: 1;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  animation: characterFloat 4s ease-in-out infinite;
+}
+
+@keyframes characterFloat {
+  50% {
+    translate: 0 -0.3rem;
+  }
+}
+
+.lessonArt i,
+.lessonArt b,
+.lessonArt small {
+  position: absolute;
+  color: #826c5a;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.lessonArt i {
+  top: 0.4rem;
+  right: 1.2rem;
+  font-size: 2rem;
+  opacity: 0.55;
+}
+
+.lessonArt b {
+  bottom: 1.5rem;
+  left: 1rem;
+  font-size: 2rem;
+  opacity: 0.55;
+}
+
+.lessonArt small {
+  right: 0.65rem;
+  bottom: 0.45rem;
+  font-size: 1.1rem;
+  opacity: 0.65;
+}
+
+.lessonCardFooter {
+  display: flex;
+  min-height: 2.65rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.4rem;
+  border-top: 1px solid #eee8dd;
+  color: #7d7569;
+  font-size: 0.78rem;
+}
+
+.lessonCardFooter > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.statusDot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #b8a891;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sectionHeading h2,
+.methodCard h2 {
+  margin: 0;
+  font-size: 1.13rem;
+  line-height: 1.45;
+}
+
+.exploreSection .sectionHeading h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  line-height: 1.25;
+}
+
+.pathSection,
+.kanaSection {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid #e8e1d6;
+  border-radius: 0.85rem;
+  background: #fffdf8;
+  box-shadow: 0 4px 16px rgb(28 27 26 / 3%);
+}
+
+.kanaSection {
+  background:
+    radial-gradient(ellipse at 92% 10%, rgb(230 211 183 / 20%), transparent 14rem),
+    #fffdf8;
+}
+
+.pathCount,
+.kanaCount {
+  padding-bottom: 0.1rem;
+  color: #837b70;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.pathSection > p + div {
+  margin-top: 1.2rem;
+}
+
+.availableNote {
+  margin: 0.65rem 0 -0.65rem;
+  color: #8a8175;
+  font-size: 0.75rem;
+}
+
+.pathWeeks {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+  color: #90887d;
+  font-size: 0.68rem;
+}
+
+.kanaIntro {
+  margin: 0.35rem 0 0.85rem;
+  color: #777065;
+  font-size: 0.82rem;
+}
+
+.kanaStrip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.kanaItem {
+  display: grid;
+  min-height: 4.5rem;
+  justify-items: center;
+  align-content: center;
+  gap: 0.1rem;
+  border: 1px solid #eee6d9;
+  border-radius: 0.65rem;
+  background: #faf7f0;
+}
+
+.kanaItem span {
+  color: #9c4939;
+  font-family: var(--font-jp);
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.kanaItem small {
+  color: #777065;
+  font-size: 0.74rem;
+}
+
+.progressCard,
+.methodCard {
+  padding: 1.25rem;
+  border: 1px solid #e8e1d6;
+  border-radius: 0.85rem;
+  background: #fffdf8;
+  box-shadow: 0 4px 16px rgb(28 27 26 / 3%);
+}
+
+.progressStat {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.9rem;
+}
+
+.progressStat > span {
+  color: var(--ink);
+  font-size: 2.5rem;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.progressStat div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.progressStat strong {
+  font-size: 0.9rem;
+}
+
+.progressStat small {
+  color: #81796d;
+  font-size: 0.75rem;
+}
+
+.progressDivider {
+  height: 1px;
+  margin: 1rem 0 0.75rem;
+  background: #eee8dd;
+}
+
+.streakStat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  color: #777065;
+  font-size: 0.82rem;
+}
+
+.streakNumber {
+  color: #bd7d3e;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.localNote {
+  margin: 0.85rem 0 0;
+  color: #968e82;
+  font-size: 0.71rem;
+  line-height: 1.5;
+}
+
+.methodCard h2 {
+  margin-bottom: 0.8rem;
+}
+
+.methodStep {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid #f0ebe3;
+}
+
+.methodStep > span {
+  color: #b1885e;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.methodStep p {
+  margin: 0;
+  color: #70695e;
+  font-size: 0.79rem;
+  line-height: 1.55;
+}
+
+.methodStep strong {
+  color: #312e29;
+}
+
+.encouragement {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.25rem 0.2rem;
+}
+
+.encouragement > span {
+  color: #bd9d78;
+  font-family: Georgia, serif;
+  font-size: 2.3rem;
+  line-height: 1;
+}
+
+.encouragement p {
+  margin: 0.3rem 0 0;
+  color: #777065;
+  font-size: 0.83rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding: 1rem 0 0.5rem;
+  border-top: 1px solid #e8e3d8;
+  color: #928a7e;
+  font-size: 0.73rem;
+}
+
+@media (min-width: 1500px) {
+  .content {
+    padding-right: 4rem;
+    padding-left: 4rem;
+  }
+}
+
+@media (max-width: 1120px) {
+  .sidebar {
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+  }
+
+  .topbar,
+  .content {
+    padding-right: 1.7rem;
+    padding-left: 1.7rem;
+  }
+
+  .learningGrid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(14rem, 0.85fr);
+  }
+
+  .lessonCardBody {
+    grid-template-columns: minmax(0, 1fr) 8.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mobileProfileMenu {
+    position: relative;
+    z-index: 30;
+    display: block;
+  }
+
+  .workspace {
+    padding-bottom: 0;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    min-height: 4.8rem;
+    gap: 0.1rem 0.7rem;
+    padding: 0 1.4rem;
+  }
+
+  .topbarActions {
+    gap: 0.8rem;
+  }
+
+  .content {
+    padding: 1.3rem 1.4rem;
+  }
+
+  .mobileProfileTrigger {
+    display: inline-flex;
+    min-height: 2.45rem;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.65rem 0.25rem 0.35rem;
+    border: 1px solid #e8e3d8;
+    border-radius: 999px;
+    background: #fffdf8;
+    color: #5d5549;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 650;
+    cursor: pointer;
+  }
+
+  .mobileProfileAvatar {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+  }
+
+  .mobileNavPanel {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    right: auto;
+    left: 0;
+    z-index: 40;
+    display: grid;
+    width: min(17rem, calc(100vw - 2rem));
+    max-height: min(65dvh, 30rem);
+    gap: 0.2rem;
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: 1px solid #e8e3d8;
+    border-radius: 0.85rem;
+    background: #fffdf8;
+    box-shadow: 0 12px 32px rgb(28 27 26 / 16%);
+  }
+
+  .mobileNavPanel[hidden] {
+    display: none;
+  }
+
+  .mobileNavLink {
+    display: flex;
+    min-height: 2.8rem;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem 0.75rem;
+    border: 0;
+    border-radius: 0.6rem;
+    background: transparent;
+    color: #686258;
+    font: inherit;
+    font-size: 0.86rem;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .mobileNavLink:hover,
+  .mobileNavActive {
+    background: #f3ece2;
+    color: var(--shu-deep);
+  }
+
+  .mobileNavIcon {
+    width: 1.3rem;
+    flex: 0 0 auto;
+    color: var(--shu);
+    text-align: center;
+  }
+
+  .learningGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rightColumn {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .encouragement {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 0.15rem 0.5rem;
+    padding: 0.55rem 1rem;
+  }
+
+  .topbar > p {
+    flex: 1 1 8rem;
+    min-width: 0;
+    font-size: 0.75rem;
+  }
+
+  .topbarActions {
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.45rem;
+  }
+
+  .profileButton {
+    min-height: 1.8rem;
+    padding: 0.2rem 0.45rem;
+    font-size: 0.68rem;
+  }
+
+  .previewBanner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .previewBanner button {
+    padding-left: 0;
+  }
+
+  .streak {
+    font-size: 0.75rem;
+  }
+
+  .content {
+    padding: 0.8rem 1rem 1.25rem;
+  }
+
+  .welcome {
+    min-height: 9rem;
+    padding: 1.1rem;
+  }
+
+  .focusPage,
+  .settingsPage {
+    gap: 0.9rem;
+    padding: 1rem;
+  }
+
+  .settingsCard {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .welcomeText {
+    font-size: 0.84rem;
+  }
+
+  .courseBadge {
+    min-height: 1.5rem;
+    font-size: 0.58rem;
+  }
+
+  .lessonCardBody {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.25rem;
+  }
+
+  .lessonCardFooter {
+    flex-wrap: wrap;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .lessonArt {
+    display: none;
+  }
+
+  .lessonCardTop,
+  .lessonCardFooter {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .timeTag {
+    font-size: 0.7rem;
+  }
+
+  .rightColumn {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .encouragement {
+    grid-column: auto;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+}
+
+:global(html[data-theme="dark"]) .shell {
+  background:
+    radial-gradient(ellipse at 86% 5%, rgb(73 100 111 / 23%), transparent 28rem),
+    radial-gradient(ellipse at 17% 48%, rgb(129 93 66 / 12%), transparent 31rem),
+    #171d21;
+  color: #e8e4dc;
+}
+
+:global(html[data-theme="dark"]) .sidebar,
+:global(html[data-theme="dark"]) .topbar {
+  border-color: #303a40;
+  background: #1d252a;
+}
+
+:global(html[data-theme="dark"]) .navLabel,
+:global(html[data-theme="dark"]) .sidebarFooter,
+:global(html[data-theme="dark"]) .topbar > p,
+:global(html[data-theme="dark"]) .pathCount,
+:global(html[data-theme="dark"]) .kanaCount,
+:global(html[data-theme="dark"]) .availableNote,
+:global(html[data-theme="dark"]) .pathWeeks,
+:global(html[data-theme="dark"]) .kanaIntro,
+:global(html[data-theme="dark"]) .kanaItem small,
+:global(html[data-theme="dark"]) .progressStat small,
+:global(html[data-theme="dark"]) .streakStat,
+:global(html[data-theme="dark"]) .localNote,
+:global(html[data-theme="dark"]) .methodStep p,
+:global(html[data-theme="dark"]) .encouragement p,
+:global(html[data-theme="dark"]) .footer {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .navLink {
+  color: #c1c5c2;
+}
+
+:global(html[data-theme="dark"]) .navIcon {
+  color: #9da5a5;
+}
+
+:global(html[data-theme="dark"]) .navLink:hover,
+:global(html[data-theme="dark"]) .navActive {
+  background: #30383b;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .sidebarNote,
+:global(html[data-theme="dark"]) .lessonCard,
+:global(html[data-theme="dark"]) .pathSection,
+:global(html[data-theme="dark"]) .kanaSection,
+:global(html[data-theme="dark"]) .progressCard,
+:global(html[data-theme="dark"]) .methodCard {
+  border-color: #354147;
+  background: #222b30;
+  box-shadow: 0 5px 18px rgb(0 0 0 / 15%);
+}
+
+:global(html[data-theme="dark"]) .lessonCard::before {
+  opacity: 0.8;
+}
+
+:global(html[data-theme="dark"]) .sidebarNote {
+  background: #292f30;
+}
+
+:global(html[data-theme="dark"]) .sidebarNote p,
+:global(html[data-theme="dark"]) .streak,
+:global(html[data-theme="dark"]) .profileButton,
+:global(html[data-theme="dark"]) .lessonText > p:not(.sectionEyebrow):not(.saveMessage),
+:global(html[data-theme="dark"]) .dayTag,
+:global(html[data-theme="dark"]) .timeTag,
+:global(html[data-theme="dark"]) .lessonCardFooter,
+:global(html[data-theme="dark"]) .encouragement p {
+  color: #c1c3bd;
+}
+
+:global(html[data-theme="dark"]) .lessonText > .missionHint {
+  background: #293237;
+}
+
+:global(html[data-theme="dark"]) .topbar > p span {
+  color: #637078;
+}
+
+:global(html[data-theme="dark"]) .languageSwitch {
+  border-color: #3c464b;
+  background: #151c20;
+}
+
+:global(html[data-theme="dark"]) .languageSwitch button,
+:global(html[data-theme="dark"]) .mobileProfileTrigger {
+  color: #c1c5c2;
+}
+
+:global(html[data-theme="dark"]) .languageSwitch button[aria-pressed="true"] {
+  background: #323b40;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .profileButton {
+  border-color: #3c464b;
+  background: #252e34;
+}
+
+:global(html[data-theme="dark"]) .mobileProfileTrigger,
+:global(html[data-theme="dark"]) .mobileNavPanel {
+  border-color: #3c464b;
+  background: #252e34;
+}
+
+:global(html[data-theme="dark"]) .mobileNavLink {
+  color: #c1c5c2;
+}
+
+:global(html[data-theme="dark"]) .mobileNavLink:hover,
+:global(html[data-theme="dark"]) .mobileNavActive {
+  background: #30383b;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .previewBanner {
+  border-color: #64503a;
+  background: #30291f;
+  color: #e1c9a9;
+}
+
+:global(html[data-theme="dark"]) .previewBanner button {
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .lessonCardTop {
+  border-color: #354147;
+  background: #293237;
+}
+
+:global(html[data-theme="dark"]) .lessonCardFooter {
+  border-color: #354147;
+}
+
+:global(html[data-theme="dark"]) .lessonArt {
+  background-color: #2a3235;
+  background-image: radial-gradient(#4b5150 0.7px, transparent 0.7px);
+  color: #e38e79;
+}
+
+:global(html[data-theme="dark"]) .lessonArt i,
+:global(html[data-theme="dark"]) .lessonArt b,
+:global(html[data-theme="dark"]) .lessonArt small {
+  color: #c8ae97;
+}
+
+:global(html[data-theme="dark"]) .kanaItem {
+  border-color: #394348;
+  background: #293237;
+}
+
+:global(html[data-theme="dark"]) .kanaItem span {
+  color: #e69b84;
+}
+
+:global(html[data-theme="dark"]) .progressDivider,
+:global(html[data-theme="dark"]) .methodStep {
+  background: #3a4549;
+}
+
+:global(html[data-theme="dark"]) .methodStep {
+  border-color: #3a4549;
+}
+
+:global(html[data-theme="dark"]) .methodStep strong {
+  color: #e7e2d9;
+}
+
+:global(html[data-theme="dark"]) .saveMessage {
+  color: #a8c99b;
+}
+
+:global(html[data-theme="dark"]) .startButton {
+  background: #a13a2f;
+}
+
+:global(html[data-theme="dark"]) .startButton:hover {
+  background: #842e25;
+}
+
+:global(html[data-theme="dark"]) .footer {
+  border-color: #303a40;
+}
+
+.brandBlock {
+  margin-bottom: 1.6rem;
+}
+
+.brandTagline {
+  margin: 0.45rem 0 0 3rem;
+  color: #8a8175;
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.settingsHeading {
+  margin: 0;
+  color: #938b7d;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.settingsError {
+  margin: 0;
+  color: #9d2d21;
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.content {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.welcome,
+.summaryStats,
+.activeLearning,
+.insightGrid,
+.practiceGrid,
+.focusPage,
+.exploreSection,
+.settingsPage {
+  animation: viewArrive 320ms var(--ease) both;
+}
+
+@keyframes viewArrive {
+  from {
+    opacity: 0;
+    translate: 0 0.6rem;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.summaryStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid #e8e1d6;
+}
+
+.summaryStat {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.35rem 1rem;
+}
+
+.summaryStat:first-child {
+  padding-left: 0;
+}
+
+.summaryStat + .summaryStat {
+  border-left: 1px solid #e8e1d6;
+}
+
+.statIcon {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #f3ece2;
+  color: var(--shu-deep);
+  font-size: 1.1rem;
+}
+
+.summaryStat > div {
+  display: grid;
+  gap: 0.08rem;
+}
+
+.statLabel {
+  color: #837b70;
+  font-size: 0.7rem;
+}
+
+.summaryStat strong {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.activeLearning {
+  display: grid;
+  gap: 1rem;
+}
+
+.insightGrid,
+.practiceGrid {
+  display: grid;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.insightGrid {
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+}
+
+.practiceGrid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dailyGoal,
+.progressSection,
+.activitySection,
+.exploreSection {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid #e8e1d6;
+  border-radius: 0.9rem;
+  background: #fffdf8;
+  box-shadow: 0 4px 16px rgb(28 27 26 / 3%);
+}
+
+.dailyGoal .sectionHeading {
+  align-items: center;
+}
+
+.dailyGoalLabel {
+  color: #63523e;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.dailyGoalTrack {
+  height: 0.65rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eee8dd;
+}
+
+.dailyGoalTrack span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--shu);
+  transition: width 180ms ease;
+}
+
+.dailyGoalNote,
+.progressNote {
+  margin: 0.7rem 0 0;
+  color: #81796d;
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.dailyGoal,
+.progressSection,
+.methodCard,
+.activitySection {
+  height: 100%;
+}
+
+.progressStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.progressStats .progressStat {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid #eee8dd;
+  border-radius: 0.7rem;
+  background: #fcfaf5;
+}
+
+.progressStats .progressStat strong {
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1.15;
+}
+
+.progressStats .progressStat span {
+  color: #81796d;
+  font-size: 0.7rem;
+}
+
+.progressSection [role="img"] {
+  margin-top: 1rem;
+}
+
+.progressSection .pathWeeks {
+  margin-top: 0.45rem;
+}
+
+.progressNote {
+  margin-bottom: 0;
+}
+
+.methodCard {
+  scroll-margin-top: 1rem;
+}
+
+.methodSteps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.9rem;
+}
+
+.methodCard .methodStep {
+  grid-template-columns: 1.8rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.55rem;
+  padding: 0.7rem 0.65rem;
+  border: 1px solid #eee8dd;
+  border-radius: 0.7rem;
+  background: #fcfaf5;
+}
+
+.methodCard .methodStep > span {
+  display: grid;
+  width: 1.7rem;
+  height: 1.7rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #f3ece2;
+  color: var(--shu-deep);
+  font-size: 0.85rem;
+}
+
+.methodSequence {
+  margin: 0.45rem 0 0;
+  color: #8a8175;
+  font-size: 0.67rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.activityEmpty {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+  padding: 1rem;
+  border: 1px dashed #ded6c9;
+  border-radius: 0.75rem;
+  background: #fcfaf5;
+}
+
+.activityEmpty > span {
+  color: #a48d6e;
+  font-size: 1.5rem;
+}
+
+.activityEmpty strong {
+  color: #4a453e;
+  font-size: 0.85rem;
+}
+
+.activityEmpty p {
+  margin: 0.2rem 0 0;
+  color: #81796d;
+  font-size: 0.75rem;
+}
+
+.activityList {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #eee8dd;
+  border-radius: 0.7rem;
+  background: #fcfaf5;
+}
+
+.activityMark {
+  display: grid;
+  width: 1.8rem;
+  height: 1.8rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf4e9;
+  color: #54724d;
+  font-size: 0.8rem;
+}
+
+.activityDescription {
+  display: grid;
+  min-width: 0;
+  gap: 0.1rem;
+}
+
+.activityDescription strong {
+  overflow: hidden;
+  color: #35322d;
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activityDescription > span {
+  color: #81796d;
+  font-size: 0.68rem;
+}
+
+.activityDuration {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: #686258;
+  font-size: 0.72rem;
+}
+
+.exploreSection {
+  scroll-margin-top: 1rem;
+}
+
+.exploreSection .sectionHeading {
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.exploreDescription {
+  max-width: 25rem;
+  margin: 0;
+  color: #81796d;
+  font-size: 0.8rem;
+}
+
+.languageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.languageCard {
+  display: grid;
+  min-width: 0;
+  gap: 0.7rem;
+  padding: 0.9rem;
+  border: 1px solid #e8e1d6;
+  border-radius: 0.8rem;
+  background: #fcfaf5;
+}
+
+.languageCardTop {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.languageIcon {
+  color: #8c4a3e;
+  font-family: var(--font-jp);
+  font-size: 1.25rem;
+}
+
+.languageActive,
+.languageAvailable {
+  color: #54724d;
+  font-size: 0.58rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+.languageAvailable {
+  color: #81796d;
+}
+
+.languageCard h3 {
+  margin: 0;
+  color: #35322d;
+  font-size: 0.9rem;
+}
+
+.languageAction {
+  display: inline-flex;
+  min-height: 2.2rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.35rem 0.55rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: #f1e7db;
+  color: var(--shu-deep);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.languageAction:hover {
+  background: #ead9c8;
+}
+
+.languageUnavailable {
+  color: #8b8479;
+  font-size: 0.7rem;
+}
+
+:global(html[data-theme="dark"]) .brandTagline,
+:global(html[data-theme="dark"]) .settingsHeading,
+:global(html[data-theme="dark"]) .statLabel,
+:global(html[data-theme="dark"]) .viewIntro > p:last-child,
+:global(html[data-theme="dark"]) .settingsCard p:last-child,
+:global(html[data-theme="dark"]) .methodSequence,
+:global(html[data-theme="dark"]) .dailyGoalNote,
+:global(html[data-theme="dark"]) .progressNote,
+:global(html[data-theme="dark"]) .progressStats .progressStat span,
+:global(html[data-theme="dark"]) .activityDescription > span,
+:global(html[data-theme="dark"]) .activityEmpty p,
+:global(html[data-theme="dark"]) .exploreDescription {
+  color: #aeb5b5;
+}
+
+:global(html[data-theme="dark"]) .settingsError {
+  color: #f0a08d;
+}
+
+:global(html[data-theme="dark"]) .dailyGoal,
+:global(html[data-theme="dark"]) .progressSection,
+:global(html[data-theme="dark"]) .activitySection,
+:global(html[data-theme="dark"]) .exploreSection,
+:global(html[data-theme="dark"]) .focusPage,
+:global(html[data-theme="dark"]) .settingsPage,
+:global(html[data-theme="dark"]) .kanaSection {
+  border-color: #354147;
+  background: #222b30;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+}
+
+:global(html[data-theme="dark"]) .settingsCard {
+  border-color: #3c474c;
+  background: #293237;
+}
+
+:global(html[data-theme="dark"]) .kanaSection {
+  background:
+    radial-gradient(ellipse at 92% 10%, rgb(129 93 66 / 10%), transparent 14rem),
+    #222b30;
+}
+
+:global(html[data-theme="dark"]) .textLink {
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .summaryStats {
+  border-color: #354147;
+}
+
+:global(html[data-theme="dark"]) .summaryStat + .summaryStat {
+  border-color: #354147;
+}
+
+:global(html[data-theme="dark"]) .statIcon,
+:global(html[data-theme="dark"]) .methodCard .methodStep > span {
+  background: #382d2a;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .dailyGoalLabel {
+  color: #e1c9a9;
+}
+
+:global(html[data-theme="dark"]) .dailyGoalTrack,
+:global(html[data-theme="dark"]) .progressStats .progressStat,
+:global(html[data-theme="dark"]) .methodCard .methodStep,
+:global(html[data-theme="dark"]) .activityEmpty,
+:global(html[data-theme="dark"]) .activityItem,
+:global(html[data-theme="dark"]) .languageCard {
+  border-color: #3c474c;
+  background: #293237;
+}
+
+:global(html[data-theme="dark"]) .activityEmpty strong,
+:global(html[data-theme="dark"]) .activityDescription strong,
+:global(html[data-theme="dark"]) .languageCard h3 {
+  color: #e0dfd8;
+}
+
+:global(html[data-theme="dark"]) .activityDuration,
+:global(html[data-theme="dark"]) .languageAvailable,
+:global(html[data-theme="dark"]) .languageUnavailable {
+  color: #b7bfbe;
+}
+
+:global(html[data-theme="dark"]) .activityMark {
+  background: #263a2b;
+  color: #b9d6b9;
+}
+
+:global(html[data-theme="dark"]) .languageIcon {
+  color: #e69b84;
+}
+
+:global(html[data-theme="dark"]) .languageActive {
+  color: #9dc79d;
+}
+
+:global(html[data-theme="dark"]) .languageAction {
+  background: #382d2a;
+  color: #f0ad86;
+}
+
+:global(html[data-theme="dark"]) .languageAction:hover {
+  background: #493630;
+}
+
+@media (max-width: 1120px) {
+  .languageGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .insightGrid,
+  .practiceGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .welcomeArtwork {
+    width: 8.5rem;
+    height: 8.5rem;
+  }
+
+  .artQuote {
+    top: -0.75rem;
+    left: 1.4rem;
+    font-size: 7rem;
+  }
+
+  .languageGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .welcome > div:first-child {
+    min-width: 0;
+    flex: 1 1 11rem;
+  }
+
+  .welcomeArtwork {
+    width: 5.3rem;
+    height: 5.3rem;
+  }
+
+  .artQuote {
+    top: -0.4rem;
+    left: 0.8rem;
+    font-size: 4.5rem;
+  }
+
+  .artSpark {
+    top: 0.4rem;
+    right: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .artBubble {
+    right: 0.35rem;
+    bottom: 0.5rem;
+    width: 1.5rem;
+    height: 1.2rem;
+  }
+
+  .navLink {
+    min-width: 0;
+  }
+
+  .content {
+    gap: 0.85rem;
+    padding: 0.9rem 1rem 1.25rem;
+  }
+
+  .summaryStats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .summaryStat {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.45rem 0.35rem;
+  }
+
+  .statIcon {
+    width: 1.4rem;
+    height: 1.4rem;
+    font-size: 0.8rem;
+  }
+
+  .statLabel {
+    font-size: 0.6rem;
+  }
+
+  .summaryStat strong {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .dailyGoal,
+  .progressSection,
+  .activitySection,
+  .exploreSection {
+    padding: 1rem;
+  }
+
+  .dailyGoal .sectionHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .progressStats {
+    gap: 0.35rem;
+  }
+
+  .progressStats .progressStat {
+    padding: 0.55rem 0.45rem;
+  }
+
+  .progressStats .progressStat strong {
+    font-size: 1.05rem;
+  }
+
+  .progressStats .progressStat span {
+    font-size: 0.62rem;
+  }
+
+  .methodSteps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .exploreSection .sectionHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .languageGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

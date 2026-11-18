@@ -15,16 +15,24 @@
 
 ## Folder structure
 ```
-app/            Routes, layouts, server actions, route handlers
-components/     UI components (ui/, lesson/, practice/, layout/)
-lib/            supabase clients, utils, scoring, spaced-repetition logic
-data/           Static curriculum: days 1-30, kana, vocab, phrases (typed TS/JSON)
-types/          Shared TypeScript types
-hooks/          Client hooks (useSpeech, useProgress, useRecorder)
-public/         Fonts, icons, static audio (if any)
-styles/         Global CSS, design tokens
-docs/           Extra notes, diagrams
+app/                    Next.js routes and layouts; route entries stay small
+features/
+  dashboard/            Dashboard screen and its styles
+  learning/              Lesson UI, curriculum, learning logic, and types
+  onboarding/            Welcome flow and language-selection content
+  profile/               Learner profile, account menu, and avatars
+  squad/                 Squad screen and its scoring logic
+shared/
+  components/            UI reused across multiple features
+  data/                  Shared UI copy
+lib/supabase/            Shared Supabase browser/server clients
+public/                  Static assets
+styles/                  Global CSS and design tokens
+supabase/                Database schema and ordered migrations
+tests/                   Automated tests and standalone SQL checks
 ```
+
+Keep feature-specific components, data, logic, and types together under that feature. Only genuinely reusable UI or infrastructure belongs in `shared/` or `lib/`.
 
 ## Data flow
 1. Curriculum is static in `data/` (fast, free, versioned in git).
