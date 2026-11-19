@@ -2,15 +2,15 @@
   display: grid;
   gap: 1.1rem;
   padding: clamp(1rem, 3vw, 1.5rem);
-  border: 1px solid #e8e1d6;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  background: #fffdf8;
-  box-shadow: 0 8px 26px rgb(28 27 26 / 4%);
+  background: var(--surface);
+  box-shadow: 0 8px 26px rgb(36 51 42 / 5%);
 }
 
 .heading .eyebrow {
   margin: 0 0 0.3rem;
-  color: #a64b3c;
+  color: var(--shu);
   font-size: 0.67rem;
   font-weight: 750;
   letter-spacing: 0.1em;
@@ -18,14 +18,14 @@
 
 .heading h2 {
   margin: 0;
-  color: #292e30;
+  color: var(--ink);
   font-size: clamp(1.15rem, 3vw, 1.45rem);
   line-height: 1.25;
 }
 
 .heading > p:last-child {
   margin: 0.35rem 0 0;
-  color: #777064;
+  color: var(--ink-soft);
   font-size: 0.82rem;
 }
 
@@ -43,10 +43,10 @@
   align-content: center;
   gap: 0.4rem;
   padding: 0.6rem 0.25rem;
-  border: 1px solid #e9e3da;
+  border: 1px solid var(--line);
   border-radius: 0.9rem;
-  background: #fcfaf5;
-  color: #514a42;
+  background: var(--surface-soft);
+  color: var(--ink);
   font: inherit;
   font-size: 0.75rem;
   font-weight: 650;
@@ -59,15 +59,15 @@
 
 .option:hover {
   transform: translateY(-2px);
-  border-color: #cf9a84;
-  box-shadow: 0 8px 18px rgb(72 50 41 / 9%);
+  border-color: #a4d986;
+  box-shadow: 0 8px 18px rgb(47 125 16 / 10%);
 }
 
 .selected {
-  border-color: #b94d3c;
-  background: #fff4ed;
-  box-shadow: 0 0 0 2px rgb(185 77 60 / 16%);
-  color: #8f352a;
+  border-color: var(--shu);
+  background: var(--accent-mint);
+  box-shadow: 0 0 0 2px rgb(47 125 16 / 16%);
+  color: var(--shu-deep);
 }
 
 .avatar {
@@ -77,28 +77,28 @@
 }
 
 :global(html[data-theme="dark"]) .section {
-  border-color: #354147;
-  background: #222b30;
+  border-color: var(--line);
+  background: var(--surface);
 }
 
 :global(html[data-theme="dark"]) .heading h2 {
-  color: #e8e4dc;
+  color: var(--ink);
 }
 
 :global(html[data-theme="dark"]) .heading > p:last-child {
-  color: #aeb5b5;
+  color: var(--ink-soft);
 }
 
 :global(html[data-theme="dark"]) .option {
-  border-color: #3c474c;
-  background: #293237;
-  color: #e0dfd8;
+  border-color: var(--line);
+  background: var(--surface-soft);
+  color: var(--ink);
 }
 
 :global(html[data-theme="dark"]) .selected {
-  border-color: #e07a68;
-  background: #382d2a;
-  color: #f0ad86;
+  border-color: var(--shu);
+  background: var(--surface-muted);
+  color: var(--shu-deep);
 }
 
 @media (max-width: 640px) {

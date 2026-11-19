@@ -35,3 +35,9 @@ Course, lesson, learning-item, and question data use stable IDs and localized te
 
 ## D12 — ₹0 product constraint
 Do not add paid APIs, services, dependencies, or infrastructure. Any future free-tier hosting choice must be checked against its limits and current terms.
+
+## D13 — Server-computed lesson scores
+The client submits correct and total answer counts; Supabase recomputes the 0-100 score and validates the counts, lesson day, language, and timezone. The client is not trusted with the score itself. Full answer-level validation remains dependent on server-side curriculum and answer contracts.
+
+## D14 — Daily mission duration follows the learner
+The onboarding routine of 5–60 minutes is a gentle focus target, not a forced timer. A guided session includes warm-up, learn, the selected active skill, recall, and a real outcome; it shows actual focus-time progress and never makes the learner wait to finish.

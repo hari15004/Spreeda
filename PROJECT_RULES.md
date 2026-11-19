@@ -17,6 +17,7 @@ Multilingual language-learning platform. The website is the first priority, defa
 11. No dead code, duplicate code, unused imports, leftover files.
 12. Before creating any new file/component, say what it does and what it affects.
 13. At the end of each task, give a concise blue-text summary of the work completed and relevant validation results.
+14. At the end of each task, include simple manual steps the owner can follow to test the change in the app.
 
 ## Session start checklist
 1. Read PROJECT_RULES.md
@@ -25,7 +26,7 @@ Multilingual language-learning platform. The website is the first priority, defa
 4. Work only on it (unless a dependency forces otherwise)
 5. Test
 6. Update TASKS.md and CHANGELOG.md
-7. Report: done / tested / remaining
+7. Report: done / tested / remaining, including manual app-testing steps
 
 ## Design rules
 - Japanese-inspired, calm, premium, and contemporary. Original, not a template or a clone of another language app.

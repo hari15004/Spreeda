@@ -5,6 +5,8 @@ import Link from "next/link";
 import { AccountMenu } from "@/features/profile/components/AccountMenu";
 import { DayPath } from "@/features/learning/components/DayPath";
 import { LessonPlayer } from "@/features/learning/components/LessonPlayer";
+import { LanguageRally } from "@/features/learning/components/LanguageRally";
+import { QuickMatchGame } from "@/features/learning/components/QuickMatchGame";
 import {
   LearningPathSummary,
   WelcomeFlow,
@@ -45,6 +47,7 @@ import {
   getDueReviewIds,
   parseLearningMemory,
 } from "@/features/learning/lib/learning-memory";
+import { createDailyMission } from "@/features/learning/lib/daily-mission";
 import {
   getLearningMemorySnapshot,
   getServerLearningMemorySnapshot,
@@ -65,6 +68,20 @@ const databaseLanguageCodes: Record<string, string> = {
   en: "english",
   ko: "korean",
   zh: "chinese",
+};
+const missionCheckpointIcons: Record<
+  keyof typeof uiCopy.en.missionBlock,
+  string
+> = {
+  review: "↻",
+  learn: "✦",
+  practice: "!",
+  recall: "?",
+  result: "✓",
+  listen: "♫",
+  speak: "◖",
+  read: "Aa",
+  write: "✎",
 };
 
 let sessionLanguage: UiLanguage = "en";
@@ -212,7 +229,11 @@ function isLessonCheckpoint(value: unknown): value is LessonCheckpoint {
     "lessonId" in value &&
     typeof value.lessonId === "string" &&
     "phase" in value &&
-    (value.phase === "learn" || value.phase === "quiz") &&
+    (value.phase === "intro" ||
+      value.phase === "review" ||
+      value.phase === "learn" ||
+      value.phase === "practice" ||
+      value.phase === "quiz") &&
     "questionIndex" in value &&
     typeof value.questionIndex === "number" &&
     Number.isInteger(value.questionIndex) &&
@@ -466,6 +487,7 @@ export default function HomePage() {
       cancelled = true;
     };
   }, [activeCourse, supabase]);
+
   const storedLanguage = useSyncExternalStore(
     subscribeToLanguage,
     getLanguageSnapshot,
@@ -480,6 +502,7 @@ export default function HomePage() {
   const [languageSaveError, setLanguageSaveError] = useState(false);
   const [profileAvatarSaveError, setProfileAvatarSaveError] = useState(false);
   const [lessonOpen, setLessonOpen] = useState(false);
+  const [quickGameOpen, setQuickGameOpen] = useState(false);
   const [openLessonId, setOpenLessonId] = useState<string | null>(null);
   const [sessionLesson, setSessionLesson] = useState<Lesson | null>(null);
   const [saveStatus, setSaveStatus] = useState<"saved" | "error" | null>(null);
@@ -671,7 +694,8 @@ export default function HomePage() {
         .rpc("complete_lesson", {
           p_language: dbLanguage,
           p_day: lessonToPlay.sequence,
-          p_score: percent,
+          p_correct_count: score,
+          p_total_count: lessonToPlay.questions.length,
           p_tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata",
         })
         .then(({ data, error }) => {
@@ -777,6 +801,21 @@ export default function HomePage() {
       (total, activity) => total + (activity.durationSeconds ?? 0),
       0,
     );
+  const dailyMission = createDailyMission(
+    activeLesson.sequence,
+    learnerProfile.dailyMinutes,
+    learnerProfile.practiceModes,
+  );
+  const rallyCheckpoints = dailyMission.blocks.map((block) => {
+    const labelKey =
+      block.kind === "practice" && block.practiceMode
+        ? block.practiceMode
+        : block.kind;
+    return {
+      label: t.missionBlock[labelKey],
+      icon: missionCheckpointIcons[labelKey],
+    };
+  });
   const dailyGoalSeconds = learnerProfile.dailyMinutes * 60;
   const dailyGoalPercent = Math.min(
     100,
@@ -983,7 +1022,7 @@ export default function HomePage() {
               <p className={styles.welcomeText}>{t.welcomeDescription}</p>
             </div>
             <div className={styles.welcomeArtwork} aria-hidden="true">
-              <span className={styles.artQuote}>“</span>
+              <span className={styles.artQuote}>⌣</span>
               <span className={styles.artRing} />
               <span className={styles.artSpark}>✳</span>
               <span className={styles.artBubble} />
@@ -1040,7 +1079,7 @@ export default function HomePage() {
                 <span className={styles.timeTag}>
                   {t.estimatedDuration.replace(
                     "{minutes}",
-                    String(activeLesson.estimatedMinutes),
+                    String(dailyMission.totalMinutes),
                   )}
                 </span>
               </div>
@@ -1066,16 +1105,34 @@ export default function HomePage() {
                       )}
                     </p>
                   )}
-                  <button
-                    type="button"
-                    className={styles.startButton}
-                    onClick={() => {
-                      startLesson(activeLesson);
-                    }}
-                  >
-                    {courseCompleted ? t.practiceAgain : t.continueLearning}
-                    <span aria-hidden="true">→</span>
-                  </button>
+                  <details className={styles.missionPlan}>
+                    <summary>
+                      <span>{t.missionPlan}</span>
+                      <strong>
+                        {numberFormat.format(dailyMission.totalMinutes)}{" "}
+                        {t.minuteShort}
+                      </strong>
+                    </summary>
+                    <ol aria-label={t.missionPlan}>
+                      {dailyMission.blocks.map((block) => {
+                        const labelKey =
+                          block.kind === "practice" && block.practiceMode
+                            ? block.practiceMode
+                            : block.kind;
+                        return (
+                          <li key={block.kind}>
+                            <span>{t.missionBlock[labelKey]}</span>
+                            <strong>
+                              {t.missionMinute.replace(
+                                "{minutes}",
+                                String(block.minutes),
+                              )}
+                            </strong>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </details>
                   {(saveStatus || progressSnapshot === "storage-error") && (
                     <p className={styles.saveMessage} role="status">
                       {saveStatus === "saved"
@@ -1087,12 +1144,31 @@ export default function HomePage() {
                     </p>
                   )}
                 </div>
-                <div className={styles.lessonArt} aria-hidden="true">
-                  <span lang={targetLanguage.code}>
-                    {targetLanguage.nativeName}
-                  </span>
-                  <small>{targetLanguage.script}</small>
+                <div className={styles.rallyWrap}>
+                  <LanguageRally
+                    language={language}
+                    courseTitle={
+                      activeCourse.title[language] ?? activeCourse.title.en
+                    }
+                    lessonTitle={
+                      activeLesson.title[language] ?? activeLesson.title.en
+                    }
+                    lessonNumber={activeLesson.sequence}
+                    completedLessons={completedAvailableLessons}
+                    totalLessons={availableLessons}
+                    checkpoints={rallyCheckpoints}
+                    onDrive={() => startLesson(activeLesson)}
+                  />
                 </div>
+                <button
+                  type="button"
+                  className={styles.quickGameButton}
+                  onClick={() => setQuickGameOpen(true)}
+                  aria-haspopup="dialog"
+                >
+                  {t.quickGame.launch}
+                  <span aria-hidden="true">↗</span>
+                </button>
               </div>
               <div className={styles.lessonCardFooter}>
                 <span>
@@ -1110,6 +1186,52 @@ export default function HomePage() {
               </div>
             </section>
 
+          </section>
+          <section className={styles.journeySection} aria-labelledby="journey-title">
+            <div className={styles.journeyHeading}>
+              <span className={styles.journeyIcon} aria-hidden="true">🗺️</span>
+              <div>
+                <p className={styles.sectionEyebrow}>{t.dayPathEyebrow}</p>
+                <h2 id="journey-title">{t.dayPathTitle}</h2>
+                <span>
+                  {t.availableCompletionProgress
+                    .replace(
+                      "{completed}",
+                      numberFormat.format(completedAvailableLessons),
+                    )
+                    .replace("{total}", numberFormat.format(availableLessons))}
+                </span>
+              </div>
+            </div>
+            <div
+              className={styles.journeyProgress}
+              role="progressbar"
+              aria-label={t.dayPathTitle}
+              aria-valuenow={completedAvailableLessons}
+              aria-valuemin={0}
+              aria-valuemax={Math.max(1, availableLessons)}
+            >
+              <span
+                style={{
+                  width: `${
+                    availableLessons === 0
+                      ? 0
+                      : Math.min(
+                          100,
+                          (completedAvailableLessons / availableLessons) * 100,
+                        )
+                  }%`,
+                }}
+              />
+            </div>
+            <button
+              type="button"
+              className={styles.journeyButton}
+              onClick={() => setActiveView("progress")}
+            >
+              {t.progress}
+              <span aria-hidden="true">→</span>
+            </button>
           </section>
             </>
           )}
@@ -1423,6 +1545,7 @@ export default function HomePage() {
       {lessonOpen && (
         <LessonPlayer
           lesson={lessonToPlay}
+          dailyMission={dailyMission}
           language={language}
           targetLanguageCode={targetLanguage.code}
           speechLocale={targetLanguage.speechLocale}
@@ -1440,6 +1563,18 @@ export default function HomePage() {
             setOpenLessonId(null);
             setSessionLesson(null);
           }}
+        />
+      )}
+      {quickGameOpen && (
+        <QuickMatchGame
+          key={`${activeCourse.id}:${activeLesson.id}`}
+          lesson={activeLesson}
+          courseTitle={activeCourse.title[language] ?? activeCourse.title.en}
+          language={language}
+          targetLanguageCode={targetLanguage.code}
+          speechLocale={targetLanguage.speechLocale}
+          onAssessment={recordAssessment}
+          onClose={() => setQuickGameOpen(false)}
         />
       )}
     </main>

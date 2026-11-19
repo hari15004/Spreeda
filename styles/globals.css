@@ -25,6 +25,11 @@ body {
   outline-offset: 3px;
 }
 
+::selection {
+  background: var(--accent-sun);
+  color: var(--ink);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -821,3 +821,222 @@
 :global(html[data-theme="dark"]) .secondaryButton:hover {
   background: #3a4840;
 }
+
+.page {
+  background:
+    radial-gradient(ellipse at 88% 4%, rgb(88 204 2 / 9%), transparent 28rem),
+    var(--paper);
+  color: var(--ink);
+}
+
+.wordmark,
+.pageHeading h1,
+.titleLine h2,
+.cardHeading h3,
+.learnerDetails > strong,
+.learnerScore,
+.emptyState h2,
+.actionCard h3,
+.gateCard h1 {
+  color: var(--ink);
+}
+
+.backLink,
+.pageHeading p,
+.memberLimit,
+.cardHeading > span,
+.statCard > span,
+.inviteCode span,
+.seatCount,
+.learnerMeta,
+.emptyLeaderboard,
+.scoreDetails summary,
+.scoreDetails p,
+.languageCard p,
+.inputLabel,
+.learnerScore small,
+.gateCard p,
+.loadingCard {
+  color: var(--ink-soft);
+}
+
+.wordmarkIcon {
+  background: linear-gradient(145deg, #2f7d10, #58cc02);
+}
+
+.squadPanel,
+.languageCard,
+.emptyState,
+.actionCard,
+.loadingCard,
+.gateCard,
+.statCard {
+  border-color: var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgb(36 51 42 / 5%);
+}
+
+.memberLimit,
+.switcherButton,
+.quietButton,
+.selectInput,
+.textInput,
+.secondaryButton {
+  border-color: var(--line);
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+
+.switcherButton:hover,
+.switcherActive {
+  border-color: #a4d986;
+  background: var(--surface-muted);
+  color: var(--shu-deep);
+}
+
+.adminBadge,
+.learnerAvatar {
+  background: var(--surface-muted);
+  color: var(--shu-deep);
+}
+
+.inviteCard,
+.learnerMe {
+  border-color: var(--line);
+  background: var(--surface-muted);
+}
+
+.inviteCode strong {
+  color: var(--shu-deep);
+}
+
+.statCard strong,
+.learnerScore {
+  color: var(--ink);
+}
+
+.cardHeading,
+.learnerRow {
+  border-color: var(--line);
+}
+
+.scoreTrack {
+  background: var(--paper-deep);
+}
+
+.scoreTrack span {
+  background: #55b88a;
+}
+
+.primaryButton {
+  border-color: var(--shu);
+  background: var(--shu);
+  color: #fff;
+}
+
+.primaryButton:hover {
+  background: var(--shu-deep);
+}
+
+.secondaryButton:hover,
+.quietButton:hover {
+  background: var(--surface-muted);
+}
+
+.selectInput:focus,
+.textInput:focus {
+  border-color: var(--shu);
+  outline-color: rgb(47 125 16 / 18%);
+}
+
+:global(html[data-theme="dark"]) .page {
+  background:
+    radial-gradient(ellipse at 88% 4%, rgb(88 204 2 / 7%), transparent 28rem),
+    var(--paper);
+}
+
+:global(html[data-theme="dark"]) .wordmark,
+:global(html[data-theme="dark"]) .pageHeading h1,
+:global(html[data-theme="dark"]) .titleLine h2,
+:global(html[data-theme="dark"]) .cardHeading h3,
+:global(html[data-theme="dark"]) .learnerDetails > strong,
+:global(html[data-theme="dark"]) .learnerScore,
+:global(html[data-theme="dark"]) .emptyState h2,
+:global(html[data-theme="dark"]) .actionCard h3,
+:global(html[data-theme="dark"]) .gateCard h1 {
+  color: var(--ink);
+}
+
+:global(html[data-theme="dark"]) .backLink,
+:global(html[data-theme="dark"]) .pageHeading p,
+:global(html[data-theme="dark"]) .memberLimit,
+:global(html[data-theme="dark"]) .cardHeading > span,
+:global(html[data-theme="dark"]) .statCard > span,
+:global(html[data-theme="dark"]) .inviteCode span,
+:global(html[data-theme="dark"]) .seatCount,
+:global(html[data-theme="dark"]) .learnerMeta,
+:global(html[data-theme="dark"]) .emptyLeaderboard,
+:global(html[data-theme="dark"]) .scoreDetails summary,
+:global(html[data-theme="dark"]) .scoreDetails p,
+:global(html[data-theme="dark"]) .languageCard p,
+:global(html[data-theme="dark"]) .inputLabel,
+:global(html[data-theme="dark"]) .learnerScore small,
+:global(html[data-theme="dark"]) .gateCard p,
+:global(html[data-theme="dark"]) .loadingCard {
+  color: var(--ink-soft);
+}
+
+:global(html[data-theme="dark"]) .squadPanel,
+:global(html[data-theme="dark"]) .languageCard,
+:global(html[data-theme="dark"]) .emptyState,
+:global(html[data-theme="dark"]) .actionCard,
+:global(html[data-theme="dark"]) .loadingCard,
+:global(html[data-theme="dark"]) .gateCard,
+:global(html[data-theme="dark"]) .statCard {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+:global(html[data-theme="dark"]) .memberLimit,
+:global(html[data-theme="dark"]) .switcherButton,
+:global(html[data-theme="dark"]) .quietButton,
+:global(html[data-theme="dark"]) .selectInput,
+:global(html[data-theme="dark"]) .textInput,
+:global(html[data-theme="dark"]) .secondaryButton {
+  border-color: var(--line);
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+
+:global(html[data-theme="dark"]) .inviteCard,
+:global(html[data-theme="dark"]) .learnerMe,
+:global(html[data-theme="dark"]) .adminBadge,
+:global(html[data-theme="dark"]) .learnerAvatar {
+  border-color: var(--line);
+  background: var(--surface-muted);
+  color: var(--shu-deep);
+}
+
+:global(html[data-theme="dark"]) .inviteCode strong {
+  color: var(--shu-deep);
+}
+
+:global(html[data-theme="dark"]) .primaryButton {
+  border-color: var(--shu);
+  background: var(--shu);
+  color: #171532;
+}
+
+:global(html[data-theme="dark"]) .primaryButton:hover {
+  background: var(--shu-deep);
+}
+
+:global(html[data-theme="dark"]) .switcherButton:hover,
+:global(html[data-theme="dark"]) .switcherActive,
+:global(html[data-theme="dark"]) .secondaryButton:hover,
+:global(html[data-theme="dark"]) .quietButton:hover {
+  border-color: var(--line);
+  background: var(--surface-muted);
+  color: var(--shu-deep);
+}

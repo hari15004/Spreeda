@@ -103,7 +103,7 @@ export type Lesson = {
 
 export type LessonCheckpoint = {
   lessonId: string;
-  phase: "learn" | "quiz";
+  phase: "intro" | "review" | "learn" | "practice" | "quiz";
   questionIndex: number;
   answer: string | null;
   score: number;

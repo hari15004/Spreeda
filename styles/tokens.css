@@ -1,14 +1,22 @@
-/* Design tokens — single source of truth for the look of the app. */
+/* Design tokens — an upbeat green-and-sunshine palette for daily practice. */
 :root {
-  /* Washi paper + sumi ink + vermilion (shu) */
-  --paper: #f6f1e7;
-  --paper-deep: #ece4d3;
-  --ink: #1c1b1a;
-  --ink-soft: #5a554d;
-  --line: #d9cfba;
-  --shu: #c0392b;
-  --shu-deep: #9d2d21;
-  --ai: #2b3a55;
+  --paper: #f7f9f2;
+  --paper-deep: #eaf0e3;
+  --ink: #24332a;
+  --ink-soft: #66756a;
+  --line: #dce6d8;
+  --shu: #2f7d10;
+  --shu-deep: #245f0d;
+  --ai: #2387cf;
+  --surface: #ffffff;
+  --surface-soft: #fbfdf8;
+  --surface-muted: #edf7e8;
+  --accent-lime: #58cc02;
+  --accent-mint: #e5f7df;
+  --accent-sun: #ffdf57;
+  --accent-orange: #ff9a32;
+  --accent-blue: #51b5f9;
+  --accent-purple: #bb80ff;
   color-scheme: light;
 
   /* Type */
@@ -35,12 +43,21 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #171d21;
-  --paper-deep: #30393e;
-  --ink: #e8e4dc;
-  --ink-soft: #b7b7b0;
-  --line: #465158;
-  --shu: #e07a68;
-  --shu-deep: #f0a08d;
-  --ai: #a9bad4;
+  --paper: #141c16;
+  --paper-deep: #29362b;
+  --ink: #f2f7ee;
+  --ink-soft: #bdcbbb;
+  --line: #384b3a;
+  --shu: #8dda50;
+  --shu-deep: #b9ef8e;
+  --ai: #74c8ff;
+  --surface: #1d281f;
+  --surface-soft: #243127;
+  --surface-muted: #2b3a2d;
+  --accent-lime: #80d94b;
+  --accent-mint: #28442d;
+  --accent-sun: #ffdf57;
+  --accent-orange: #ffac4d;
+  --accent-blue: #74c8ff;
+  --accent-purple: #cf9cff;
 }

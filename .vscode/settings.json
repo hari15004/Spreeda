@@ -1,0 +1,20 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.exclude": {
+    "**/*.tsbuildinfo": true
+  },
+  "search.exclude": {
+    "**/.next": true,
+    "**/node_modules": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "Spreeda.tsx": "Spreeda.module.css",
+    "LessonPlayer.tsx": "LessonPlayer.module.css",
+    "QuickMatchGame.tsx": "QuickMatchGame.module.css",
+    "WelcomeFlow.tsx": "WelcomeFlow.module.css",
+    "AccountMenu.tsx": "AccountMenu.module.css",
+    "ProfileAvatarPicker.tsx": "ProfileAvatarPicker.module.css",
+    "SquadPage.tsx": "squad.module.css"
+  }
+}

@@ -6,14 +6,14 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.1rem;
-  border: 1px solid #e8e1d6;
-  border-radius: 0.85rem;
-  background: #fcfaf5;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
 }
 
 .guest {
   margin: 0;
-  color: #777064;
+  color: var(--ink-soft);
   font-size: 0.82rem;
 }
 
@@ -39,7 +39,7 @@
 
 .identity .eyebrow {
   margin-bottom: 0.2rem;
-  color: #8a8175;
+  color: var(--ink-soft);
   font-size: 0.62rem;
   font-weight: 750;
   letter-spacing: 0.08em;
@@ -47,7 +47,7 @@
 
 .identity strong {
   overflow: hidden;
-  color: #35322d;
+  color: var(--ink);
   font-size: 0.95rem;
   text-overflow: ellipsis;
 }
@@ -61,10 +61,7 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.55rem 0.85rem;
-  border: 1px solid #e3c9bd;
   border-radius: 0.65rem;
-  background: #fff6f0;
-  color: #963f32;
   font: inherit;
   font-size: 0.78rem;
   font-weight: 700;
@@ -72,10 +69,26 @@
   cursor: pointer;
 }
 
-.logout:hover,
+.logout {
+  border: 1px solid #edc9bd;
+  background: #fff6f0;
+  color: #963f32;
+}
+
+.login {
+  border: 1px solid var(--shu);
+  background: var(--shu);
+  color: #fff;
+}
+
+.logout:hover {
+  border-color: #c56e5b;
+  background: #fff0e8;
+}
+
 .login:hover {
-  border-color: #b94d3c;
-  background: #ffede3;
+  border-color: var(--shu-deep);
+  background: var(--shu-deep);
 }
 
 .error {
@@ -86,33 +99,42 @@
 }
 
 :global(html[data-theme="dark"]) .menu {
-  border-color: #354147;
-  background: #293237;
+  border-color: var(--line);
+  background: var(--surface);
 }
 
 :global(html[data-theme="dark"]) .guest,
 :global(html[data-theme="dark"]) .identity .eyebrow {
-  color: #aeb5b5;
+  color: var(--ink-soft);
 }
 
 :global(html[data-theme="dark"]) .identity strong {
-  color: #e0dfd8;
+  color: var(--ink);
 }
 
-:global(html[data-theme="dark"]) .logout,
+:global(html[data-theme="dark"]) .logout {
+  border-color: #75463e;
+  background: #3a2824;
+  color: #ffb8a8;
+}
+
+:global(html[data-theme="dark"]) .logout:hover {
+  background: #4a3029;
+}
+
 :global(html[data-theme="dark"]) .login {
-  border-color: #67463d;
-  background: #382d2a;
-  color: #f0ad86;
+  border-color: var(--shu);
+  background: var(--shu);
+  color: #193018;
 }
 
-:global(html[data-theme="dark"]) .logout:hover,
 :global(html[data-theme="dark"]) .login:hover {
-  background: #493630;
+  border-color: var(--shu-deep);
+  background: var(--shu-deep);
 }
 
 :global(html[data-theme="dark"]) .error {
-  color: #f0a08d;
+  color: #ffb8a8;
 }
 
 @media (max-width: 520px) {

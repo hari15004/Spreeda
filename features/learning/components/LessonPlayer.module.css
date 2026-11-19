@@ -62,6 +62,114 @@
   color: var(--ink-soft);
 }
 
+.sessionProgress {
+  margin: 1.25rem 0 1.5rem;
+}
+
+.sessionProgressLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.sessionProgress .progress {
+  margin: 0.4rem 0 0;
+}
+
+.focusProgress {
+  height: 0.3rem;
+  margin: 0.4rem 0 0.8rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--paper-deep);
+}
+
+.focusProgress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--shu);
+  transition: width 300ms ease;
+}
+
+.missionIntro,
+.sessionStage {
+  padding: clamp(0.25rem, 2vw, 0.8rem) 0;
+}
+
+.missionIntro h3,
+.sessionStage h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+}
+
+.missionSteps,
+.warmupList {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.25rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.missionSteps li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: #fbf8f0;
+}
+
+.missionSteps strong {
+  flex: 0 0 auto;
+  color: var(--shu-deep);
+}
+
+.sessionNote {
+  margin: 0.8rem 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+}
+
+.warmupItem {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: #fbf8f0;
+}
+
+.warmupItem summary {
+  color: var(--shu-deep);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.warmupItem p {
+  margin: 0.75rem 0 0;
+  color: var(--ink);
+}
+
+.practiceCard {
+  margin-top: 1rem;
+  padding: clamp(1rem, 4vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: #fbf8f0;
+}
+
+.practiceTarget {
+  margin: 1rem 0;
+  color: var(--shu-deep);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  line-height: 1.2;
+  text-align: center;
+}
+
 .mission {
   margin: 0 0 1.25rem;
   padding: 0.75rem 0.9rem;
@@ -613,6 +721,9 @@
 :global(html[data-theme="dark"]) .kanaCard,
 :global(html[data-theme="dark"]) .answer,
 :global(html[data-theme="dark"]) .resultList button,
+:global(html[data-theme="dark"]) .missionSteps li,
+:global(html[data-theme="dark"]) .warmupItem,
+:global(html[data-theme="dark"]) .practiceCard,
 :global(html[data-theme="dark"]) .typingInput,
 :global(html[data-theme="dark"]) .wordTile {
   border-color: #465158;
@@ -698,4 +809,323 @@
 
 :global(html[data-theme="dark"]) .resultScore {
   color: #f0a08d;
+}
+
+.dialog {
+  border-color: var(--line);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 28px 90px rgb(24 43 23 / 26%);
+}
+
+.dialog::backdrop {
+  background: rgb(15 26 16 / 62%);
+  backdrop-filter: blur(5px);
+}
+
+.missionSteps li,
+.warmupItem,
+.practiceCard,
+.curriculum article,
+.lessonPlan,
+.typingInput,
+.wordTile,
+.answer,
+.resultList button {
+  border-color: var(--line);
+  border-radius: 0.85rem;
+  background: var(--surface-soft);
+}
+
+.missionSteps strong,
+.warmupItem summary,
+.curriculum h3,
+.speaker,
+.skillTags,
+.questionRomaji {
+  color: var(--shu-deep);
+}
+
+.practiceTarget {
+  color: var(--shu-deep);
+}
+
+.progress span,
+.focusProgress span,
+.primary {
+  background: var(--shu);
+}
+
+.primary {
+  min-height: 3rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 7px 16px rgb(47 125 16 / 18%);
+}
+
+.primary:hover {
+  background: var(--shu-deep);
+}
+
+.close,
+.audioPrompt {
+  border-color: var(--line);
+  border-radius: 0.8rem;
+}
+
+.streakMessage {
+  border-color: #f0dda0;
+  background: #fff8df;
+  color: #775900;
+}
+
+:global(html[data-theme="dark"]) .dialog {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+:global(html[data-theme="dark"]) .missionSteps li,
+:global(html[data-theme="dark"]) .warmupItem,
+:global(html[data-theme="dark"]) .practiceCard,
+:global(html[data-theme="dark"]) .curriculum article,
+:global(html[data-theme="dark"]) .lessonPlan,
+:global(html[data-theme="dark"]) .typingInput,
+:global(html[data-theme="dark"]) .wordTile,
+:global(html[data-theme="dark"]) .answer,
+:global(html[data-theme="dark"]) .resultList button {
+  border-color: var(--line);
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+
+:global(html[data-theme="dark"]) .primary {
+  background: var(--shu);
+  color: #193018;
+}
+
+:global(html[data-theme="dark"]) .primary:hover {
+  background: var(--shu-deep);
+  color: #193018;
+}
+
+:global(html[data-theme="dark"]) .streakMessage {
+  border-color: #61532e;
+  background: #383321;
+  color: #f7dd89;
+}
+
+.dialog {
+  border-width: 2px;
+  border-bottom-width: 6px;
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(circle at 95% 3%, rgb(255 223 87 / 18%), transparent 10rem),
+    var(--surface);
+}
+
+.sessionProgress {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface-soft);
+}
+
+.sessionProgress .progress,
+.focusProgress {
+  height: 0.72rem;
+  border: 2px solid #d5e4ce;
+  background: #edf4e7;
+}
+
+.sessionProgress .progress span,
+.focusProgress span {
+  background: linear-gradient(90deg, #2f7d10, #58cc02);
+}
+
+.missionSteps li {
+  min-height: 3.2rem;
+  align-items: center;
+  border-width: 2px;
+  border-bottom-width: 4px;
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.missionSteps li:nth-child(odd) {
+  background: #f4faee;
+}
+
+.practiceCard,
+.curriculum article {
+  border-width: 2px;
+  border-bottom-width: 5px;
+  border-radius: 1.15rem;
+}
+
+.practiceTarget {
+  display: grid;
+  min-height: 8rem;
+  place-items: center;
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 20% 20%, rgb(255 223 87 / 40%), transparent 5rem),
+    var(--accent-mint);
+}
+
+.answer {
+  min-height: 5rem;
+  border-width: 2px;
+  border-bottom-width: 5px;
+  border-radius: 1rem;
+  font-weight: 750;
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.answer:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--surface-muted);
+}
+
+.answer:active:not(:disabled) {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+
+.correct {
+  border-color: #419526;
+  background: #e6f8dc;
+  color: #245f0d;
+}
+
+.incorrect {
+  border-color: #cf6254;
+  background: #fff0ec;
+  color: #8d3026;
+}
+
+.feedbackCorrect {
+  border: 2px solid #a7d986;
+  background: #eaf8df;
+  color: #245f0d;
+}
+
+.feedbackIncorrect {
+  border: 2px solid #efb4a8;
+  background: #fff0ec;
+  color: #8d3026;
+}
+
+.primary {
+  min-height: 3.3rem;
+  border: 0;
+  border-bottom: 5px solid #1d5c09;
+  border-radius: 1rem;
+  box-shadow: none;
+  font-weight: 850;
+  transition:
+    transform 140ms ease,
+    background 140ms ease;
+}
+
+.primary:hover {
+  transform: translateY(-1px);
+}
+
+.primary:active {
+  transform: translateY(3px);
+  border-bottom-width: 1px;
+}
+
+.streakMessage {
+  border-width: 2px;
+  border-bottom-width: 4px;
+  border-radius: 1rem;
+  background: #fff4cc;
+  font-weight: 750;
+}
+
+.resultScore {
+  animation: resultPop 450ms cubic-bezier(0.2, 1.4, 0.5, 1) both;
+}
+
+@keyframes resultPop {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+:global(html[data-theme="dark"]) .dialog {
+  background:
+    radial-gradient(circle at 95% 3%, rgb(255 223 87 / 9%), transparent 10rem),
+    var(--surface);
+}
+
+:global(html[data-theme="dark"]) .sessionProgress,
+:global(html[data-theme="dark"]) .missionSteps li,
+:global(html[data-theme="dark"]) .missionSteps li:nth-child(odd),
+:global(html[data-theme="dark"]) .practiceCard,
+:global(html[data-theme="dark"]) .curriculum article,
+:global(html[data-theme="dark"]) .answer {
+  border-color: var(--line);
+  background: var(--surface-soft);
+}
+
+:global(html[data-theme="dark"]) .sessionProgress .progress,
+:global(html[data-theme="dark"]) .focusProgress {
+  border-color: var(--line);
+  background: var(--surface-muted);
+}
+
+:global(html[data-theme="dark"]) .practiceTarget {
+  background:
+    radial-gradient(circle at 20% 20%, rgb(255 223 87 / 10%), transparent 5rem),
+    var(--surface-muted);
+}
+
+:global(html[data-theme="dark"]) .correct,
+:global(html[data-theme="dark"]) .feedbackCorrect {
+  border-color: #5da235;
+  background: #2b4827;
+  color: #c9f4ab;
+}
+
+:global(html[data-theme="dark"]) .incorrect,
+:global(html[data-theme="dark"]) .feedbackIncorrect {
+  border-color: #8d4a3f;
+  background: #3a2824;
+  color: #ffb8a8;
+}
+
+:global(html[data-theme="dark"]) .primary {
+  border-bottom-color: #4a852a;
+  background: var(--shu);
+  color: #193018;
+}
+
+:global(html[data-theme="dark"]) .primary:hover {
+  background: var(--shu-deep);
+}
+
+:global(html[data-theme="dark"]) .streakMessage {
+  border-color: #8a7026;
+  background: #403821;
+  color: #ffe27a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer,
+  .primary,
+  .resultScore {
+    animation: none;
+    transition: none;
+  }
 }

@@ -12,10 +12,10 @@
   justify-items: center;
   gap: 0.35rem;
   padding: 0.65rem 0.35rem;
-  border: 1px solid #e8dfd0;
+  border: 1px solid var(--line);
   border-radius: 0.85rem;
-  background: #fffdf8;
-  color: #273642;
+  background: var(--surface);
+  color: var(--ink);
   cursor: pointer;
   text-align: center;
   transition:
@@ -28,20 +28,20 @@
 
 .soundCard:hover {
   transform: translateY(-4px) rotate(-1deg);
-  border-color: #d7a58f;
-  background: #fff8f1;
-  box-shadow: 0 10px 24px rgb(75 54 37 / 10%);
+  border-color: #a4d986;
+  background: var(--surface-muted);
+  box-shadow: 0 10px 24px rgb(36 51 42 / 9%);
 }
 
 .soundCard[aria-pressed="true"] {
   transform: translateY(-2px);
-  border-color: #c85c48;
-  background: #fff2e9;
-  box-shadow: 0 0 0 3px rgb(200 57 43 / 9%);
+  border-color: var(--shu);
+  background: var(--accent-mint);
+  box-shadow: 0 0 0 3px rgb(47 125 16 / 10%);
 }
 
 .character {
-  color: #9d382e;
+  color: var(--shu-deep);
   font-family: inherit;
   font-size: 2rem;
   line-height: 1.1;
@@ -49,7 +49,7 @@
 
 .reading {
   min-height: 1rem;
-  color: #7e7569;
+  color: var(--ink-soft);
   font-size: 0.68rem;
   line-height: 1.35;
 }
@@ -57,34 +57,34 @@
 .audioNotice {
   grid-column: 1 / -1;
   margin: 0;
-  color: #7e5d43;
+  color: var(--ink-soft);
   font-size: 0.75rem;
   line-height: 1.5;
 }
 
 :global(html[data-theme="dark"]) .soundCard {
-  border-color: #3c474c;
-  background: #293237;
-  color: #e8e4dc;
+  border-color: var(--line);
+  background: var(--surface-soft);
+  color: var(--ink);
 }
 
 :global(html[data-theme="dark"]) .soundCard:hover {
-  border-color: #ad6d5f;
-  background: #34383a;
+  border-color: var(--shu);
+  background: var(--surface-muted);
 }
 
 :global(html[data-theme="dark"]) .soundCard[aria-pressed="true"] {
-  border-color: #e07a68;
-  background: #382d2a;
+  border-color: var(--shu);
+  background: var(--surface-muted);
 }
 
 :global(html[data-theme="dark"]) .character {
-  color: #f0ad86;
+  color: var(--shu-deep);
 }
 
 :global(html[data-theme="dark"]) .reading,
 :global(html[data-theme="dark"]) .audioNotice {
-  color: #b7bfbe;
+  color: var(--ink-soft);
 }
 
 @keyframes soundArrive {

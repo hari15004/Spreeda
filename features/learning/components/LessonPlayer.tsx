@@ -3,16 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import { uiCopy } from "@/shared/data/ui-copy";
 import { speak } from "@/features/learning/lib/speech";
+import type { DailyMission } from "@/features/learning/lib/daily-mission";
 import type {
   Lesson,
   LessonCheckpoint,
   LearningSkill,
+  LearningItem,
   UiLanguage,
 } from "@/features/learning/types/learning";
+import type { PracticeMode } from "@/features/profile/types/learner-profile";
 import styles from "./LessonPlayer.module.css";
 
 type Props = {
   lesson: Lesson;
+  dailyMission: DailyMission;
   language: UiLanguage;
   targetLanguageCode: string;
   speechLocale: string;
@@ -29,7 +33,15 @@ type Props = {
   onClose: () => void;
 };
 
-type Phase = "learn" | "quiz" | "result";
+type Phase = LessonCheckpoint["phase"] | "result";
+
+const sessionPhases: readonly LessonCheckpoint["phase"][] = [
+  "intro",
+  "review",
+  "learn",
+  "practice",
+  "quiz",
+];
 
 function getElapsedSeconds(
   lessonStartedAt: number | null,
@@ -53,6 +65,7 @@ function normalizedAnswer(value: string) {
 
 export function LessonPlayer({
   lesson,
+  dailyMission,
   language,
   targetLanguageCode,
   speechLocale,
@@ -82,7 +95,12 @@ export function LessonPlayer({
         (initialCheckpoint.answer === null ? 0 : 1) &&
     checkpointAnswerIsValid &&
     (initialCheckpoint.phase === "quiz" ||
-      (initialCheckpoint.questionIndex === 0 &&
+      (initialCheckpoint.phase === "practice" &&
+        initialCheckpoint.questionIndex < lesson.items.length &&
+        initialCheckpoint.answer === null &&
+        initialCheckpoint.score === 0) ||
+      (initialCheckpoint.phase !== "practice" &&
+        initialCheckpoint.questionIndex === 0 &&
         initialCheckpoint.answer === null &&
         initialCheckpoint.score === 0))
       ? initialCheckpoint
@@ -91,7 +109,7 @@ export function LessonPlayer({
   const lessonStartedAtRef = useRef<number | null>(null);
   const previousDurationRef = useRef(restoredCheckpoint?.elapsedSeconds ?? 0);
   const [phase, setPhase] = useState<Phase>(
-    restoredCheckpoint?.phase ?? "learn",
+    restoredCheckpoint?.phase ?? "intro",
   );
   const [questionIndex, setQuestionIndex] = useState(
     restoredCheckpoint?.questionIndex ?? 0,
@@ -101,9 +119,23 @@ export function LessonPlayer({
   );
   const [typedDraft, setTypedDraft] = useState("");
   const [selectedTileIndices, setSelectedTileIndices] = useState<number[]>([]);
+  const [practiceIndex, setPracticeIndex] = useState(
+    restoredCheckpoint?.phase === "practice"
+      ? Math.min(restoredCheckpoint.questionIndex, lesson.items.length - 1)
+      : 0,
+  );
+  const [practiceAnswer, setPracticeAnswer] = useState<string | null>(null);
+  const [practiceDraft, setPracticeDraft] = useState("");
   const [score, setScore] = useState(restoredCheckpoint?.score ?? 0);
+  const [elapsedSeconds, setElapsedSeconds] = useState(
+    restoredCheckpoint?.elapsedSeconds ?? 0,
+  );
+  const [completedDurationSeconds, setCompletedDurationSeconds] = useState<
+    number | null
+  >(null);
   const [speechMessage, setSpeechMessage] = useState("");
   const t = uiCopy[language].lesson;
+  const missionCopy = uiCopy[language].missionBlock;
   const eyebrow = t.eyebrow.replace("{day}", String(lesson.sequence));
 
   useEffect(() => {
@@ -124,6 +156,24 @@ export function LessonPlayer({
     if (phase === "quiz" && lessonStartedAtRef.current === null) {
       lessonStartedAtRef.current = performance.now();
     }
+    if (phase === "review") {
+      lessonStartedAtRef.current = performance.now();
+    }
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase === "intro" || phase === "result") return;
+    const updateElapsed = () => {
+      setElapsedSeconds(
+        getElapsedSeconds(
+          lessonStartedAtRef.current,
+          previousDurationRef.current,
+        ),
+      );
+    };
+    updateElapsed();
+    const intervalId = window.setInterval(updateElapsed, 1000);
+    return () => window.clearInterval(intervalId);
   }, [phase]);
 
   const currentQuestion = lesson.questions[questionIndex];
@@ -135,9 +185,67 @@ export function LessonPlayer({
   const total = lesson.questions.length;
   const passed = Math.round((score / total) * 100) >= 80;
   const needed = Math.ceil(total * 0.8);
+  const practiceBlock = dailyMission.blocks.find(
+    (block) => block.kind === "practice",
+  );
+  const practiceMode: PracticeMode = practiceBlock?.practiceMode ?? "listen";
+  const practiceItemCount = Math.min(
+    lesson.items.length,
+    Math.max(1, practiceBlock?.minutes ?? 1),
+  );
+  const practiceItems = lesson.items.slice(0, practiceItemCount);
+  const activePracticeIndex = Math.min(
+    practiceIndex,
+    Math.max(0, practiceItems.length - 1),
+  );
+  const practiceItem = practiceItems[activePracticeIndex];
+  const practiceChoiceItems: LearningItem[] = practiceItem
+    ? Array.from(
+        new Map<string, LearningItem>(
+          [...lesson.items.slice(0, 4), practiceItem].map((item) => [
+            item.id,
+            item,
+          ]),
+        ).values(),
+      )
+    : [];
+  const practiceOptions =
+    practiceMode === "listen"
+      ? practiceChoiceItems.map((item) => item.targetText)
+      : practiceChoiceItems.map(
+          (item) =>
+            item.meaning?.[language] ??
+            item.meaning?.en ??
+            item.reading,
+        );
+  const uniquePracticeOptions = [...new Set(practiceOptions)];
+  const practiceExpected = practiceItem
+    ? practiceMode === "listen" || practiceMode === "write"
+      ? practiceItem.targetText
+      : practiceItem.meaning?.[language] ??
+        practiceItem.meaning?.en ??
+        practiceItem.reading
+    : "";
+  const reviewItems = lesson.items.filter((item) => item.isReview);
+  const warmupItems =
+    reviewItems.length > 0 ? reviewItems : lesson.items.slice(0, 2);
+  const currentStepIndex = sessionPhases.indexOf(phase as LessonCheckpoint["phase"]);
+  const currentStepLabel = t.sessionStages[
+    phase === "result" ? "quiz" : phase
+  ];
+  const actualMinutes =
+    completedDurationSeconds === null
+      ? 0
+      : Math.floor(completedDurationSeconds / 60);
+  const actualMinutesLabel =
+    completedDurationSeconds !== null && completedDurationSeconds < 60
+      ? uiCopy[language].lessThanMinute
+      : new Intl.NumberFormat(language === "hi" ? "hi-IN" : "en-US").format(
+          actualMinutes,
+        );
 
   function saveCheckpoint(
-    nextPhase: "learn" | "quiz",
+    nextPhase: LessonCheckpoint["phase"],
     nextQuestionIndex: number,
     nextAnswer: string | null,
     nextScore: number,
@@ -157,7 +265,12 @@ export function LessonPlayer({
 
   function closeLesson() {
     if (phase !== "result") {
-      saveCheckpoint(phase, questionIndex, answer, score);
+      saveCheckpoint(
+        phase,
+        phase === "practice" ? activePracticeIndex : questionIndex,
+        phase === "practice" ? null : answer,
+        score,
+      );
     }
     onClose();
   }
@@ -190,6 +303,51 @@ export function LessonPlayer({
     saveCheckpoint("quiz", questionIndex, choice, nextScore);
   }
 
+  function choosePracticeAnswer(choice: string) {
+    if (!practiceItem || practiceAnswer !== null) return;
+    const correct =
+      normalizedAnswer(choice) === normalizedAnswer(practiceExpected);
+    setPracticeAnswer(choice);
+    if (practiceMode === "speak") return;
+    const skill: LearningSkill =
+      practiceMode === "listen"
+        ? "listening"
+        : practiceMode === "read"
+          ? "reading"
+          : practiceMode === "write"
+            ? "writing"
+            : "speaking";
+    onAssessment(practiceItem.id, skill, correct, Boolean(practiceItem.isReview));
+  }
+
+  function submitPracticeWriting(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (practiceDraft.trim()) choosePracticeAnswer(practiceDraft);
+  }
+
+  function continuePractice() {
+    if (!practiceItem || practiceAnswer === null) return;
+    if (activePracticeIndex === practiceItems.length - 1) {
+      setQuestionIndex(0);
+      setAnswer(null);
+      setTypedDraft("");
+      setSelectedTileIndices([]);
+      setPhase("quiz");
+      saveCheckpoint("quiz", 0, null, score);
+      return;
+    }
+    const nextPracticeIndex = activePracticeIndex + 1;
+    setPracticeIndex(nextPracticeIndex);
+    setPracticeAnswer(null);
+    setPracticeDraft("");
+    saveCheckpoint("practice", nextPracticeIndex, null, score);
+  }
+
+  function recordSpeakingPractice() {
+    if (!practiceItem || practiceAnswer !== null) return;
+    setPracticeAnswer(practiceItem.targetText);
+  }
+
   function chooseWordTile(tileIndex: number) {
     if (selectedTileIndices.includes(tileIndex)) return;
     const nextIndices = [...selectedTileIndices, tileIndex];
@@ -201,13 +359,13 @@ export function LessonPlayer({
 
   function nextQuestion() {
     if (questionIndex === lesson.questions.length - 1) {
-      onComplete(
-        score,
-        getElapsedSeconds(
-          lessonStartedAtRef.current,
-          previousDurationRef.current,
-        ),
+      const durationSeconds = getElapsedSeconds(
+        lessonStartedAtRef.current,
+        previousDurationRef.current,
       );
+      onComplete(score, durationSeconds);
+      setCompletedDurationSeconds(durationSeconds);
+      setElapsedSeconds(durationSeconds);
       setPhase("result");
       return;
     }
@@ -222,15 +380,38 @@ export function LessonPlayer({
 
   function retryQuiz() {
     previousDurationRef.current = 0;
+    setElapsedSeconds(0);
     lessonStartedAtRef.current = null;
     setQuestionIndex(0);
     setAnswer(null);
     setTypedDraft("");
     setSelectedTileIndices([]);
     setScore(0);
+    setCompletedDurationSeconds(null);
     setSpeechMessage("");
     setPhase("quiz");
     saveCheckpoint("quiz", 0, null, 0);
+  }
+
+  function startMission() {
+    setQuestionIndex(0);
+    setAnswer(null);
+    setScore(0);
+    setCompletedDurationSeconds(null);
+    setPracticeIndex(0);
+    setPracticeAnswer(null);
+    setPracticeDraft("");
+    setPhase("review");
+    previousDurationRef.current = 0;
+    setElapsedSeconds(0);
+    onCheckpoint({
+      lessonId: lesson.id,
+      phase: "review",
+      questionIndex: 0,
+      answer: null,
+      score: 0,
+      elapsedSeconds: 0,
+    });
   }
 
   return (
@@ -249,11 +430,17 @@ export function LessonPlayer({
           <div>
             <p className={styles.eyebrow}>{eyebrow}</p>
             <h2 id="lesson-title" className={styles.title}>
-              {phase === "learn"
-                ? lesson.title[language]
-                : phase === "quiz"
-                  ? t.quizTitle
-                  : t.resultTitle}
+              {phase === "intro"
+                ? t.sessionTitle
+                : phase === "review"
+                  ? t.sessionStages.review
+                  : phase === "learn"
+                    ? lesson.title[language]
+                    : phase === "practice"
+                      ? t.sessionStages.practice
+                      : phase === "quiz"
+                        ? t.quizTitle
+                        : t.resultTitle}
             </h2>
           </div>
           <button
@@ -266,9 +453,149 @@ export function LessonPlayer({
           </button>
         </header>
 
+        {phase !== "result" && (
+          <div className={styles.sessionProgress}>
+            <div className={styles.sessionProgressLabel}>
+              <span>{currentStepLabel}</span>
+              <span>
+                {t.sessionStep
+                  .replace("{current}", String(currentStepIndex + 1))
+                  .replace("{total}", String(sessionPhases.length))}
+              </span>
+            </div>
+            <div
+              className={styles.progress}
+              role="progressbar"
+              aria-label={t.sessionTitle}
+              aria-valuenow={currentStepIndex + 1}
+              aria-valuemin={0}
+              aria-valuemax={sessionPhases.length}
+            >
+              <span
+                style={{
+                  width: `${((currentStepIndex + 1) / sessionPhases.length) * 100}%`,
+                }}
+              />
+            </div>
+            {phase !== "intro" && (
+              <>
+                <div className={styles.sessionProgressLabel}>
+                  <span>{t.sessionFocusProgress}</span>
+                  <span>
+                    {t.sessionClock
+                      .replace(
+                        "{elapsed}",
+                        String(Math.floor(elapsedSeconds / 60)),
+                      )
+                      .replace(
+                        "{target}",
+                        String(dailyMission.totalMinutes),
+                      )}
+                  </span>
+                </div>
+                <div
+                  className={styles.focusProgress}
+                  role="progressbar"
+                  aria-label={t.sessionFocusProgress}
+                  aria-valuenow={Math.min(
+                    elapsedSeconds,
+                    dailyMission.totalMinutes * 60,
+                  )}
+                  aria-valuemin={0}
+                  aria-valuemax={dailyMission.totalMinutes * 60}
+                >
+                  <span
+                    style={{
+                      width: `${Math.min(
+                        100,
+                        (elapsedSeconds / (dailyMission.totalMinutes * 60)) *
+                          100,
+                      )}%`,
+                    }}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {phase === "intro" && (
+          <section className={styles.missionIntro}>
+            <p className={styles.eyebrow}>{t.sessionTitle}</p>
+            <h3>
+              {t.sessionTime.replace(
+                "{minutes}",
+                String(dailyMission.totalMinutes),
+              )}
+            </h3>
+            <p className={styles.intro}>{lesson.description[language]}</p>
+            <ol className={styles.missionSteps}>
+              {dailyMission.blocks.map((block) => {
+                const label =
+                  block.kind === "practice" && block.practiceMode
+                    ? missionCopy[block.practiceMode]
+                    : missionCopy[block.kind];
+                return (
+                  <li key={block.kind}>
+                    <span>{label}</span>
+                    <strong>
+                      {uiCopy[language].missionMinute.replace(
+                        "{minutes}",
+                        String(block.minutes),
+                      )}
+                    </strong>
+                  </li>
+                );
+              })}
+            </ol>
+            <p className={styles.sessionNote}>
+              {language === "en"
+                ? "These are focus-time estimates, not forced waiting timers. Go at your pace."
+                : "ये अभ्यास समय के अनुमान हैं, इंतज़ार करने वाले टाइमर नहीं। अपनी गति से सीखें।"}
+            </p>
+            <button type="button" className={styles.primary} onClick={startMission}>
+              {t.sessionStart} <span aria-hidden="true">→</span>
+            </button>
+          </section>
+        )}
+
+        {phase === "review" && (
+          <section className={styles.sessionStage}>
+            <h3>{t.sessionStages.review}</h3>
+            <p className={styles.intro}>
+              {reviewItems.length > 0
+                ? t.sessionReviewIntro
+                : t.sessionNoReview}
+            </p>
+            <div className={styles.warmupList}>
+              {warmupItems.map((item) => (
+                <details className={styles.warmupItem} key={item.id}>
+                  <summary lang={targetLanguageCode}>
+                    {item.meaning?.[language] ?? item.reading}
+                  </summary>
+                  <p lang={targetLanguageCode}>
+                    {item.targetText} · {item.reading}
+                  </p>
+                </details>
+              ))}
+            </div>
+            <button
+              type="button"
+              className={styles.primary}
+              onClick={() => {
+                setPhase("learn");
+                saveCheckpoint("learn", 0, null, 0);
+              }}
+            >
+              {t.sessionContinue} <span aria-hidden="true">→</span>
+            </button>
+          </section>
+        )}
+
         {phase === "learn" && (
           <>
             <p className={styles.intro}>{lesson.description[language]}</p>
+            <p className={styles.sessionNote}>{t.sessionLearnIntro}</p>
             {lesson.mission && (
               <p className={styles.mission}>
                 <strong>{uiCopy[language].missionLabel}</strong>{" "}
@@ -279,19 +606,14 @@ export function LessonPlayer({
               <section className={styles.curriculum} aria-label={
                 language === "en" ? "Lesson guide" : "पाठ मार्गदर्शिका"
               }>
-                <details className={styles.lessonPlan}>
-                  <summary>
-                    {language === "en"
-                      ? "40-minute daily plan"
-                      : "40 मिनट की दैनिक योजना"}
-                  </summary>
+                  <details className={styles.lessonPlan}>
+                    <summary>
+                      {language === "en" ? "Lesson guide" : "पाठ मार्गदर्शिका"}
+                    </summary>
                   <ol>
                     {lesson.curriculum.segments.map((segment, index) => (
                       <li key={`${segment.title.en}-${index}`}>
-                        <div>
                           <strong>{segment.title[language]}</strong>
-                          <span>{segment.minutes} min</span>
-                        </div>
                         <p>{segment.task[language]}</p>
                       </li>
                     ))}
@@ -378,14 +700,171 @@ export function LessonPlayer({
               type="button"
               className={styles.primary}
               onClick={() => {
-                setPhase("quiz");
+                setPracticeIndex(0);
+                setPracticeAnswer(null);
+                setPracticeDraft("");
+                setPhase("practice");
                 setSpeechMessage("");
-                saveCheckpoint("quiz", questionIndex, null, score);
+                saveCheckpoint("practice", 0, null, score);
               }}
             >
-              {t.startQuiz} <span aria-hidden="true">→</span>
+              {t.sessionContinue} <span aria-hidden="true">→</span>
             </button>
           </>
+        )}
+
+        {phase === "practice" && practiceItem && (
+          <section className={styles.sessionStage} aria-live="polite">
+            <p className={styles.eyebrow}>
+              {missionCopy[practiceMode]} · {activePracticeIndex + 1} /{" "}
+              {practiceItems.length}
+            </p>
+            <p className={styles.intro}>{t.sessionPracticeIntro}</p>
+            <div className={styles.practiceCard}>
+              {practiceMode === "listen" && (
+                <>
+                  <p className={styles.question}>
+                    {practiceItem.meaning?.[language] ??
+                      t.practiceListenPrompt}
+                  </p>
+                  <button
+                    type="button"
+                    className={styles.audioPrompt}
+                    onClick={() => playAudio(practiceItem.audioText)}
+                  >
+                    ▶ {t.listen}
+                  </button>
+                  <div className={styles.answerGrid}>
+                    {uniquePracticeOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        className={styles.answer}
+                        disabled={practiceAnswer !== null}
+                        onClick={() => choosePracticeAnswer(option)}
+                        lang={targetLanguageCode}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {practiceMode === "read" && (
+                <>
+                  <p className={styles.question}>{t.practiceReadPrompt}</p>
+                  <p className={styles.practiceTarget} lang={targetLanguageCode}>
+                    {practiceItem.targetText}
+                  </p>
+                  <div className={styles.answerGrid}>
+                    {uniquePracticeOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        className={styles.answer}
+                        disabled={practiceAnswer !== null}
+                        onClick={() => choosePracticeAnswer(option)}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {practiceMode === "speak" && (
+                <>
+                  <p className={styles.question}>{t.practiceSpeakPrompt}</p>
+                  <p className={styles.practiceTarget} lang={targetLanguageCode}>
+                    {practiceItem.targetText}
+                  </p>
+                  <button
+                    type="button"
+                    className={styles.audioPrompt}
+                    onClick={() => playAudio(practiceItem.audioText)}
+                  >
+                    ▶ {t.listen}
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.primary}
+                    disabled={practiceAnswer !== null}
+                    onClick={recordSpeakingPractice}
+                  >
+                    {t.practiceI_said} <span aria-hidden="true">→</span>
+                  </button>
+                  <p className={styles.selfAssessment}>{t.practiceSelfCheck}</p>
+                </>
+              )}
+
+              {practiceMode === "write" && practiceAnswer === null && (
+                <>
+                  <p className={styles.question}>{t.practiceWritePrompt}</p>
+                  <p>{practiceItem.meaning?.[language] ?? practiceItem.reading}</p>
+                  <form
+                    className={styles.typingForm}
+                    onSubmit={submitPracticeWriting}
+                  >
+                    <input
+                      autoComplete="off"
+                      className={styles.typingInput}
+                      value={practiceDraft}
+                      onChange={(event) => setPracticeDraft(event.target.value)}
+                      aria-label={t.practiceWriteLabel}
+                      lang={targetLanguageCode}
+                    />
+                    <button
+                      type="submit"
+                      className={styles.primary}
+                      disabled={!practiceDraft.trim()}
+                    >
+                      {t.practiceCheck} <span aria-hidden="true">→</span>
+                    </button>
+                  </form>
+                </>
+              )}
+
+              {practiceAnswer !== null && practiceMode !== "speak" && (
+                <p
+                  className={`${styles.feedback} ${
+                    normalizedAnswer(practiceAnswer) ===
+                    normalizedAnswer(practiceExpected)
+                      ? styles.feedbackCorrect
+                      : styles.feedbackIncorrect
+                  }`}
+                  role="status"
+                >
+                  {normalizedAnswer(practiceAnswer) ===
+                  normalizedAnswer(practiceExpected)
+                    ? t.correct
+                    : `${t.incorrect} ${practiceItem.targetText}`}
+                </p>
+              )}
+              {practiceAnswer !== null && practiceMode === "speak" && (
+                <p className={styles.feedback} role="status">
+                  {t.practiceDone}
+                </p>
+              )}
+            </div>
+            {speechMessage && (
+              <p className={styles.notice} role="status">
+                {speechMessage}
+              </p>
+            )}
+            {practiceAnswer !== null && (
+              <button
+                type="button"
+                className={styles.primary}
+                onClick={continuePractice}
+              >
+                {activePracticeIndex === practiceItems.length - 1
+                  ? t.startQuiz
+                  : t.sessionContinue}
+                <span aria-hidden="true">→</span>
+              </button>
+            )}
+          </section>
         )}
 
         {phase === "quiz" && (
@@ -635,6 +1114,17 @@ export function LessonPlayer({
 
         {phase === "result" && (
           <section className={styles.result}>
+            <p className={styles.eyebrow}>{t.sessionOutcome}</p>
+            <p className={styles.intro}>
+              {lesson.curriculum?.objective[language] ??
+                lesson.mission?.[language] ??
+                lesson.description[language]}
+            </p>
+            <p className={styles.sessionNote}>
+              {t.sessionActualTime
+                .replace("{actual}", actualMinutesLabel)
+                .replace("{target}", String(dailyMission.totalMinutes))}
+            </p>
             <p className={styles.resultScore}>
               {score}<span> / {lesson.questions.length}</span>
             </p>

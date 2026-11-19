@@ -28,7 +28,21 @@
 - [x] Squads: create / join by code / leave / owner delete, leaderboard
 - [x] Lesson pass (80%) + retry; complete_lesson RPC syncs streak/XP/unlocked day
 - [ ] Progress load from Supabase on a new device (not verified)
-- [ ] Server-side score validation (score currently comes from the client)
+- [ ] Server-side score validation migration implemented; apply and verify it in the actual Spreeda Supabase project
+- [ ] Apply `supabase/007_lesson_result_validation.sql` and run `tests/supabase/lesson-result-validation.sql` in the actual Spreeda project
+
+## Phase 6 — Engagement
+
+- [x] Exact-time daily mission planner for 5–60 minute routines
+- [x] Practice-mode rotation across Listen, Speak, Read, and Write
+- [x] Guided session flow: warm-up, learn, active practice, recall, real outcome, and focus timer
+- [ ] 14-day novelty loop and real-life milestones
+
+## Phase 7 — Admin product
+
+- [ ] Secure admin access and role management
+- [ ] Course/lesson content review and publishing
+- [ ] Learner engagement analytics and support/feedback inbox
 
 ## Phase 3 — Lessons Day 1–5
 

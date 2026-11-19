@@ -9,6 +9,10 @@ import {
 } from "../features/learning/lib/learning-memory.ts";
 import { createLessonCurriculum } from "../features/learning/data/curriculum.ts";
 import { calculateFairScore } from "../features/squad/lib/fair-score.ts";
+import {
+  createDailyMission,
+  getMissionDuration,
+} from "../features/learning/lib/daily-mission.ts";
 
 test("correct recall schedules increasingly spaced reviews", () => {
   const now = new Date("2026-01-01T00:00:00.000Z");
@@ -71,6 +75,21 @@ test("core-language lessons have a timed daily plan and distinct grammar", () =>
   );
   assert.notEqual(japanese.grammar.en, italian.grammar.en);
   assert.equal(japanese.dialogue.length, 2);
+});
+
+test("daily missions fit the learner's exact time and rotate practice modes", () => {
+  for (const minutes of [5, 10, 15, 20, 30, 40, 45, 60]) {
+    const mission = createDailyMission(7, minutes, ["listen", "speak", "read"]);
+    assert.equal(getMissionDuration(mission), minutes);
+    assert.ok(mission.blocks.some((block) => block.kind === "practice"));
+  }
+
+  const listenDay = createDailyMission(1, 30, ["listen", "speak"]);
+  const speakDay = createDailyMission(2, 30, ["listen", "speak"]);
+  assert.notEqual(
+    listenDay.blocks.find((block) => block.kind === "practice")?.practiceMode,
+    speakDay.blocks.find((block) => block.kind === "practice")?.practiceMode,
+  );
 });
 
 test("fair competition scores normalized learning evidence, not attempt volume", () => {

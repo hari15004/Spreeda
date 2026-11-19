@@ -1,21 +1,189 @@
 .path {
-  display: flex;
-  gap: 4px;
+  position: relative;
+  display: grid;
   width: 100%;
-  max-width: 28rem;
+  max-width: 33rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.35rem;
+  padding: 1rem 0.65rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at 13% 14%, rgb(88 204 2 / 10%), transparent 10rem),
+    radial-gradient(circle at 87% 88%, rgb(255 223 87 / 17%), transparent 10rem),
+    var(--surface-soft);
+  counter-reset: map-step;
 }
 
 .tick,
 .done {
-  flex: 1;
-  height: 6px;
-  border-radius: var(--radius);
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 0;
+  height: 3.6rem;
+  place-items: center;
+  counter-increment: map-step;
+}
+
+.tick::before,
+.done::before {
+  display: grid;
+  width: min(2.85rem, 80%);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 3px solid #d5e4ce;
+  border-bottom-width: 5px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink-soft);
+  content: counter(map-step);
+  font-size: 0.78rem;
+  font-weight: 850;
+  box-shadow: 0 2px 4px rgb(36 51 42 / 8%);
 }
 
 .tick {
-  background: var(--line);
+  color: var(--ink-soft);
 }
 
 .done {
-  background: var(--shu);
+  color: #193018;
+}
+
+.done::before {
+  border-color: #2f7d10;
+  background: #58cc02;
+  color: #193018;
+  content: "✓";
+  font-size: 1rem;
+}
+
+.tick:first-child::before,
+.done + .tick::before {
+  border-color: #e2ad24;
+  background: #fff1bd;
+  color: #725000;
+  box-shadow: 0 0 0 4px rgb(255 223 87 / 26%);
+  animation: nextLevelPulse 2.4s ease-in-out infinite;
+}
+
+.path > span:nth-child(10n + 6) {
+  grid-column: 5;
+}
+
+.path > span:nth-child(10n + 7) {
+  grid-column: 4;
+}
+
+.path > span:nth-child(10n + 8) {
+  grid-column: 3;
+}
+
+.path > span:nth-child(10n + 9) {
+  grid-column: 2;
+}
+
+.path > span:nth-child(10n + 10) {
+  grid-column: 1;
+}
+
+.path > span:nth-child(10n + 1)::after,
+.path > span:nth-child(10n + 2)::after,
+.path > span:nth-child(10n + 3)::after,
+.path > span:nth-child(10n + 4)::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: calc(100% + 0.35rem);
+  border-top: 3px dashed #c9dfbd;
+  content: "";
+}
+
+.path > span:nth-child(10n + 6)::after,
+.path > span:nth-child(10n + 7)::after,
+.path > span:nth-child(10n + 8)::after,
+.path > span:nth-child(10n + 9)::after {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  z-index: -1;
+  width: calc(100% + 0.35rem);
+  border-top: 3px dashed #c9dfbd;
+  content: "";
+}
+
+.path > span:nth-child(10n + 5):not(:last-child)::after,
+.path > span:nth-child(10n + 10):not(:last-child)::after {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: calc(100% + 0.35rem);
+  border: 0;
+  border-left: 3px dashed #c9dfbd;
+  content: "";
+  transform: translateX(-50%);
+}
+
+:global(html[data-theme="dark"]) .path {
+  border-color: var(--line);
+  background:
+    radial-gradient(circle at 13% 14%, rgb(88 204 2 / 9%), transparent 10rem),
+    radial-gradient(circle at 87% 88%, rgb(255 223 87 / 7%), transparent 10rem),
+    var(--surface-soft);
+}
+
+:global(html[data-theme="dark"]) .tick::before,
+:global(html[data-theme="dark"]) .done::before {
+  border-color: #455843;
+  background: #29372a;
+  color: var(--ink-soft);
+}
+
+:global(html[data-theme="dark"]) .done::before {
+  border-color: #5da235;
+  background: #80d94b;
+  color: #193018;
+}
+
+:global(html[data-theme="dark"]) .tick:first-child::before,
+:global(html[data-theme="dark"]) .done + .tick::before {
+  border-color: #9c7c24;
+  background: #4c4124;
+  color: #ffe27a;
+}
+
+:global(html[data-theme="dark"]) .path > span::after {
+  border-color: #526a4c;
+}
+
+@keyframes nextLevelPulse {
+  50% {
+    box-shadow: 0 0 0 7px rgb(255 223 87 / 12%);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 520px) {
+  .path {
+    gap: 0.2rem;
+    padding: 0.8rem 0.35rem;
+  }
+
+  .tick,
+  .done {
+    height: 3rem;
+  }
+
+  .tick::before,
+  .done::before {
+    width: min(2.35rem, 82%);
+    border-width: 2px;
+    border-bottom-width: 4px;
+    font-size: 0.7rem;
+  }
 }

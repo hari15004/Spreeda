@@ -11,10 +11,10 @@
   justify-content: center;
   gap: 0.4rem;
   padding: 0.4rem 0.65rem;
-  border: 1px solid #e8e3d8;
-  border-radius: 0.65rem;
-  background: #fffdf8;
-  color: #5d5549;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: var(--surface);
+  color: var(--ink-soft);
   font: inherit;
   font-size: 0.74rem;
   font-weight: 650;
@@ -26,8 +26,8 @@
 }
 
 .button:hover {
-  border-color: #d7b6a8;
-  background: #fff8f4;
+  border-color: #a4d986;
+  background: var(--surface-muted);
   color: var(--shu-deep);
 }
 
@@ -53,21 +53,21 @@
 }
 
 :global(html[data-theme="dark"]) .button {
-  border-color: #465158;
-  background: #252e34;
-  color: #e4e0d7;
+  border-color: var(--line);
+  background: var(--surface-soft);
+  color: var(--ink);
 }
 
 :global(html[data-theme="dark"]) .button:hover {
-  border-color: #bd7968;
-  background: #30373b;
-  color: #f0ad86;
+  border-color: var(--shu);
+  background: var(--surface-muted);
+  color: var(--shu-deep);
 }
 
 :global(html[data-theme="dark"]) .status {
-  border-color: #8e564e;
-  background: #392b2b;
-  color: #f0b5aa;
+  border-color: #75463e;
+  background: #3a2824;
+  color: #ffb8a8;
 }
 
 @media (max-width: 520px) {
